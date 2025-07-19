@@ -1,12 +1,12 @@
-
+import React, { useEffect, useState } from 'react'
+// import { io } from 'socket.io-client'
+import BookingPage from './pages/BookingPage/BookingPage'
 import './App.css'
-
 function App() {
-
   return (
-    <>
-      <h1>Hello World</h1>
-    </>
+    <div>
+      <BookingPage></BookingPage>
+    </div>
   )
 }
 
