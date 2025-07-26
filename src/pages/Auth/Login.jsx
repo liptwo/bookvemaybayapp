@@ -11,6 +11,8 @@ import { Mail } from 'lucide-react'
 import InputAdornment from '@mui/material/InputAdornment'
 // import { Navigate } from 'react-router-dom'
 import Checkbox from '@mui/material/Checkbox'
+import { LogIn } from 'lucide-react';
+import { TypeAnimation } from 'react-type-animation'
 
 export default function Login() {
   const navigate = useNavigate()
@@ -49,16 +51,34 @@ export default function Login() {
             alignItems: 'center',
             boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.)',
             borderRadius: 2,
-            backgroundColor: 'rgba(255, 255, 255, 0.7)',
+            backgroundColor: 'rgba(255, 255, 255, 0.5)',
             backdropFilter: 'blur(10px)',
             color: 'white'
           }}
         >
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap:2, pb: 2 }}>
-            <Typography sx={{ fontWeight: '700' }} variant="h6">
-              Login
-            </Typography>
-            <Plane color='#333' />
+          <Box sx={{ display: 'flex', alignItems: 'center', flexDirection:'column', justifyContent: 'center', gap:2, pb: 2 }}>
+          <Typography sx={{ fontWeight: '800', fontSize:'medium', display: 'flex', gap: 1, alignItems: 'center', justifyContent: 'center'}} variant='h6'>
+             Sign In <LogIn color='#333' size={20} />
+          </Typography>
+            {/* <Typography sx={{ fontWeight: '500', fontSize:'small' }} variant='span'>
+              Please Enter Your Account
+            </Typography> */}
+            {/* <Plane color='#333' /> */}
+            <TypeAnimation
+              // className="text-3xl font-bold text-gray-800"
+              // Initial text to display
+              sequence={[
+                // Same substring at the start will only be typed out once, initially
+                'Please Enter Your Account',
+                1000, // wait 1s before replacing "Mice" with "Hamsters"
+                'Welcome to Book Ticket Plane',
+                1000
+              ]}
+              wrapper="span"
+              speed={10}
+              style={{ fontSize: '1rem', display: 'inline-block', fontWeight: '500', color: 'black' }}
+              repeat={Infinity}
+            />
           </Box>
 
           <TextField
@@ -132,7 +152,7 @@ export default function Login() {
 
 
           <Button type="submit" fullWidth variant="contained">
-            Login
+            Sign In
           </Button>
           <Typography sx={{ fontWeight: '300'}} variant="span">
               Don't have an account?  {""}
