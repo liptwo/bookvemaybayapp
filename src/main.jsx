@@ -25,19 +25,30 @@ createRoot(document.getElementById('root')).render(
     {/* <Provider store={store}>
       <PersistGate persistor={persistor}> */}
     <ThemeProvider theme={theme}>
-      <ConfirmProvider defaultOptions={{
-        dialogProps: { maxWidth:'xs' },
-        confirmationButtonProps: { color: 'error', variant: 'outlined' },
-        cancellationButtonProps: { color: 'inherit' },
-        allowClose: false
-      }}
+      <ConfirmProvider
+        defaultOptions={{
+          dialogProps: { maxWidth: 'xs' },
+          confirmationButtonProps: { color: 'error', variant: 'outlined' },
+          cancellationButtonProps: { color: 'inherit' },
+          allowClose: false
+        }}
       >
-        <GlobalStyles styles={{ a: { textDecoration: 'none' } }}/>
+        <GlobalStyles
+          styles={{
+            body: {
+              fontFamily: `'Inter', 'Segoe UI', 'Poppins', sans-serif`
+            },
+            '*': {
+              fontFamily: `'Inter', 'Segoe UI', 'Poppins', sans-serif`
+            },
+            a: { textDecoration: 'none' }
+          }}
+        />
 
         <CssBaseline />
         <App />
         {/* <SmoothCursor /> */}
-        <ToastContainer position="bottom-right" autoClose={3000} />
+        <ToastContainer position='bottom-right' autoClose={3000} />
       </ConfirmProvider>
     </ThemeProvider>
     {/* </PersistGate>

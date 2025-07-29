@@ -1,30 +1,81 @@
-import * as React from 'react';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import * as React from 'react'
+import InputLabel from '@mui/material/InputLabel'
+import MenuItem from '@mui/material/MenuItem'
+import FormControl from '@mui/material/FormControl'
+import Select from '@mui/material/Select'
+import { Box } from '@mui/material' // Import Box để bọc và thêm padding/margin
 
 export default function SelectChairType() {
-    const [type, setType] = React.useState('');
+  const [type, setType] = React.useState('')
 
-    const handleChange = (event) => {
-        setType(event.target.value);
-    };
+  const handleChange = (event) => {
+    setType(event.target.value)
+  }
 
-    return (
-        <FormControl sx={{ m: 1, minWidth: 240, }} className='!border rounded !border-white !text-white' size="small">
-            <InputLabel id="demo-select-small-label">Chọn ghế ngồi</InputLabel>
-            <Select
-                labelId="demo-select-small-label"
-                id="demo-select-small"
-                value={type}
-                onChange={handleChange}
-            >
-                <MenuItem value={10}>Phổ thông</MenuItem>
-                <MenuItem value={20}>Phổ thông đặc biệt</MenuItem>
-                <MenuItem value={30}>Thương gia</MenuItem>
-                <MenuItem value={40}>Hạng nhất</MenuItem>
-            </Select>
-        </FormControl>
-    );
+  return (
+    <Box sx={{ minWidth: 150 }}>
+      {' '}
+      {/* Bọc FormControl trong Box để dễ dàng kiểm soát kích thước */}
+      <FormControl
+        fullWidth
+        size='small' // Sử dụng size="small" để làm cho trường nhập liệu nhỏ gọn hơn
+        sx={{
+          '& .MuiInputLabel-root': {
+            // Style cho InputLabel (placeholder)
+            color: 'white', // Màu chữ nhãn
+            '&.Mui-focused': {
+              color: 'white' // Màu chữ nhãn khi focus
+            }
+          },
+          '& .MuiOutlinedInput-root': {
+            // Style cho toàn bộ phần Input
+            color: 'white', // Màu chữ của giá trị đã chọn
+            '& fieldset': {
+              borderColor: 'white' // Màu viền mặc định
+            },
+            '&:hover fieldset': {
+              borderColor: 'white' // Màu viền khi hover
+            },
+            '&.Mui-focused fieldset': {
+              borderColor: 'white' // Màu viền khi focus
+            },
+            '& .MuiSvgIcon-root': {
+              // Style cho icon mũi tên xuống
+              color: 'white' // Màu icon mũi tên
+            }
+          },
+          '& .MuiList-root': {
+            // Style cho popover (menu item list)
+            backgroundColor: 'white', // Đảm bảo màu nền của menu là trắng
+            color: 'black' // Đảm bảo màu chữ của menu item là đen
+          }
+        }}
+      >
+        <InputLabel id='chair-type-select-label'>Chọn ghế ngồi</InputLabel>
+        <Select
+          labelId='chair-type-select-label'
+          id='chair-type-select'
+          value={type}
+          label='Chọn ghế ngồi' // Quan trọng: label cần được truyền vào Select khi variant là 'outlined' hoặc 'filled'
+          onChange={handleChange}
+          MenuProps={{
+            disableScrollLock: true, // Đúng vị trí
+            PaperProps: {
+              sx: {
+                backgroundColor: 'white', // Đảm bảo nền của dropdown là trắng
+                color: 'black', // Đảm bảo chữ trong dropdown là đen
+                borderRadius: 2 // Bo góc cho dropdown
+              }
+            }
+          }}
+        >
+          {/* MenuItems sẽ tự động kế thừa màu chữ từ Popover nếu không set riêng */}
+          <MenuItem value={10}>Phổ thông</MenuItem>
+          <MenuItem value={20}>Phổ thông đặc biệt</MenuItem>
+          <MenuItem value={30}>Thương gia</MenuItem>
+          <MenuItem value={40}>Hạng nhất</MenuItem>
+        </Select>
+      </FormControl>
+    </Box>
+  )
 }

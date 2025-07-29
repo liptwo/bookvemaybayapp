@@ -41,7 +41,7 @@ function App() {
       {/* // <Outlet/> của react router dom sẽ chạy vào các child route trong này */}
 
       {/*  board detail */}
-      <Route path='/bookingpage/' element={<BookingPage />} />
+      <Route path='/flight' element={<BookingPage />} />
       {/* // Profile userr */}
       {/* <Route path='/settings/account' element={<Settings/>} />
       <Route path='/settings/security' element={<Settings/>} />

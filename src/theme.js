@@ -60,47 +60,47 @@ const theme = createTheme({
         }
       }
     },
-    MuiTypography: {
-      styleOverrides: {
-        root: ({ theme }) => ({
-          '&.MuiTypography-body1':{ fontSize: '0.875rem' },
-          color: theme.palette.mode === 'dark' ? '#b6c2cf' : '#172b4d'
-        })
-      }
-    },
-    MuiInputLabel: {
-      styleOverrides: {
-        root:{
-          // color: theme.palette.primary.main,
-          fontSize: '0.875rem'
-        }
-      }
-    },
-    MuiOutlinedInput: {
-      styleOverrides: {
-        root: {
-          // color: theme.palette.primary.main,
-          fontSize: '0.875rem',
-          // '.MuiOutlinedInput-notchedOutline': {
-          //   borderColor: theme.palette.primary.light
-          // },
-          // '&:hover':{
-          //   '.MuiOutlinedInput-notchedOutline': {
-          //     borderColor: theme.palette.primary.light
-          //   }
-          // },
-          '& fieldset': {
-            boderWidth: '0.5px !important'
-          },
-          '&:hover fieldset': {
-            boderWidth: '1px !important'
-          },
-          '&:Mui-focused fieldset': {
-            boderWidth: '1px !important'
-          }
-        }
-      }
-    }
+    // MuiTypography: {
+    //   styleOverrides: {
+    //     root: ({ theme }) => ({
+    //       '&.MuiTypography-body1':{ fontSize: '0.875rem' },
+    //       color: theme.palette.mode === 'dark' ? '#b6c2cf' : '#172b4d'
+    //     })
+    //   }
+    // },
+    // MuiInputLabel: {
+    //   styleOverrides: {
+    //     root:{
+    //       // color: theme.palette.primary.main,
+    //       fontSize: '0.875rem'
+    //     }
+    //   }
+    // },
+    // MuiOutlinedInput: {
+    //   styleOverrides: {
+    //     root: {
+    //       // color: theme.palette.primary.main,
+    //       fontSize: '0.875rem',
+    //       // '.MuiOutlinedInput-notchedOutline': {
+    //       //   borderColor: theme.palette.primary.light
+    //       // },
+    //       // '&:hover':{
+    //       //   '.MuiOutlinedInput-notchedOutline': {
+    //       //     borderColor: theme.palette.primary.light
+    //       //   }
+    //       // },
+    //       '& fieldset': {
+    //         boderWidth: '0.5px !important'
+    //       },
+    //       '&:hover fieldset': {
+    //         boderWidth: '1px !important'
+    //       },
+    //       '&:Mui-focused fieldset': {
+    //         boderWidth: '1px !important'
+    //       }
+    //     }
+    //   }
+    // }
   }
 })
 
