@@ -7,7 +7,12 @@ import { useForm } from 'react-hook-form'
 import { Plane } from 'lucide-react'
 import { Box } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import { Mail } from 'lucide-react'
+import InputAdornment from '@mui/material/InputAdornment'
 // import { Navigate } from 'react-router-dom'
+import Checkbox from '@mui/material/Checkbox'
+import { LogIn } from 'lucide-react';
+import { TypeAnimation } from 'react-type-animation'
 
 export default function Login() {
   const navigate = useNavigate()
@@ -22,75 +27,140 @@ export default function Login() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} style={{ padding: '20px' }}>
-      <Card
-        sx={{
-          minWidth: 400,
-          maxWidth: 500,
-          p: 3,
-          mt: '50%',
-          left: '50%',
-          gap:2,
-          // position: 'absolute',
-          // transform: 'translate(-50%, -50%)',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center'
-        }}
-      >
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap:2, pb: 2 }}>
-          <Typography sx={{ fontWeight: '700' }} variant="h6">
-            Login
+    <div
+      style={{
+        minHeight: '100vh',
+        width: '100%',
+        backgroundImage: `url('https://static.vinwonders.com/production/ve-may-bay-chu-lai-ha-noi-banner.jpg')`, 
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <form onSubmit={handleSubmit(onSubmit)} style={{ width: '100%', maxWidth: 450, padding: 20 }}>
+        <Card
+          sx={{
+            width: '100%',
+            p: 3,
+            gap: 2,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.)',
+            borderRadius: 2,
+            backgroundColor: 'rgba(255, 255, 255, 0.5)',
+            backdropFilter: 'blur(10px)',
+            color: 'white'
+          }}
+        >
+          <Box sx={{ display: 'flex', alignItems: 'center', flexDirection:'column', justifyContent: 'center', gap:2, pb: 2 }}>
+          <Typography sx={{ fontWeight: '800', fontSize:'medium', display: 'flex', gap: 1, alignItems: 'center', justifyContent: 'center'}} variant='h6'>
+             Sign In <LogIn color='#333' size={20} />
           </Typography>
-          <Plane />
-        </Box>
+            {/* <Typography sx={{ fontWeight: '500', fontSize:'small' }} variant='span'>
+              Please Enter Your Account
+            </Typography> */}
+            {/* <Plane color='#333' /> */}
+            <TypeAnimation
+              // className="text-3xl font-bold text-gray-800"
+              // Initial text to display
+              sequence={[
+                // Same substring at the start will only be typed out once, initially
+                'Please Enter Your Account',
+                1000, // wait 1s before replacing "Mice" with "Hamsters"
+                'Welcome to Book Ticket Plane',
+                1000
+              ]}
+              wrapper="span"
+              speed={10}
+              style={{ fontSize: '1rem', display: 'inline-block', fontWeight: '500', color: 'black' }}
+              repeat={Infinity}
+            />
+          </Box>
 
-        <TextField
-          {...register('email', {
-            required: 'Email không được để trống',
-            pattern: {
-              value: /^\S+@\S+$/i,
-              message: 'Email không hợp lệ'
-            }
-          })}
-          fullWidth
-          size= 'small'
-          error={Boolean(errors.email)}
-          helperText={errors.email?.message}
-          sx={{ pb: 2 }}
-          id="email"
-          label="Email"
-          variant="outlined"
-        />
+          <TextField
+            {...register('email', {
+              required: 'Email không được để trống',
+              pattern: {
+                value: /^\S+@\S+$/i,
+                message: 'Email không hợp lệ'
+              }
+            })}
+            fullWidth
+            size= 'small'
+            error={Boolean(errors.email)}
+            helperText={errors.email?.message}
+            sx={{ pb: 2 }}
+            id="email"
+            label="Email"
+            variant="outlined"
+          />
 
-        <TextField
-          {...register('password', {
-            required: 'Mật khẩu không được để trống',
-            minLength: {
-              value: 6,
-              message: 'Mật khẩu phải có ít nhất 6 ký tự'
-            }
-          })}
-          size= 'small'
-          fullWidth
-          error={Boolean(errors.password)}
-          helperText={errors.password?.message}
-          sx={{ pb: 2 }}
-          id="password"
-          label="Password"
-          type="password"
-          variant="outlined"
-        />
+          <TextField
+            {...register('password', {
+              required: 'Mật khẩu không được để trống',
+              minLength: {
+                value: 6,
+                message: 'Mật khẩu phải có ít nhất 6 ký tự'
+              }
+            })}
+            size= 'small'
+            fullWidth
+            error={Boolean(errors.password)}
+            helperText={errors.password?.message}
+            sx={{ pb: 2 }}
+            id="password"
+            label="Password"
+            type="password"
+            variant="outlined"
+          />
+          <Box sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            width: '100%',
+            mb: 2, // margin-bottom
+          }}>
+            {/* Remember me */}
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <input type="checkbox" id="remember" />
+              <label htmlFor="remember" style={{ marginLeft: 8, color: '#333' }}>
+                Remember me
+              </label>
+            </Box>
 
-        <Button type="submit" fullWidth variant="contained">
-          Sign in
-        </Button>
-        <Typography sx={{ fontWeight: '300'}} variant="span">
-            Nếu chưa có tài khoản, hãy {" "}
-          <span className='text-amber-500 cursor-pointer hover:text-amber-300' onClick={() => {navigate('/register')}}> Đăng ký</span>
-        </Typography>
+            {/* Forget password */}
+            <Typography
+              variant="body2"
+              sx={{
+                color: 'linear-gradient(to right, #ebebeb 0%, #ebebeb 100%)e',
+                cursor: 'pointer',
+                textDecoration: 'underline',
+                '&:hover': { color: '#ccc' }
+              }}
+              onClick={() => {
+                // xử lý điều hướng nếu cần
+                console.log('Quên mật khẩu được nhấn')
+              }}
+            >
+              Forget Password?
+            </Typography>
+          </Box>
 
-      </Card>
-    </form>
+
+          <Button type="submit" fullWidth variant="contained">
+            Sign In
+          </Button>
+          <Typography sx={{ fontWeight: '300'}} variant="span">
+              Don't have an account?  {""}
+            <span className='text-blue-800 hover:text-blue-300' onClick={() => {navigate('/register')}}> Sign up</span>
+          </Typography>
+
+        </Card>
+      </form>
+    </div>
   )
 }
