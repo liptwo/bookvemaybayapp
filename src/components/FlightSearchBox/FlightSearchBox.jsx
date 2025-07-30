@@ -9,31 +9,32 @@ import {
   Autocomplete
 } from '@mui/material'
 import { ArrowLeftRight, MapPin } from 'lucide-react'
+import { flightOptions } from '~/utils/constants'
 
 // Dữ liệu mẫu cho Autocomplete
 // Bạn nên thay thế bằng dữ liệu sân bay thực tế từ API hoặc một file khác
-const flightOptions = [
-  { label: 'Hà Nội (HAN) - Sân bay Quốc tế Nội Bài' },
-  { label: 'TP. Hồ Chí Minh (SGN) - Sân bay Quốc tế Tân Sơn Nhất' },
-  { label: 'Đà Nẵng (DAD) - Sân bay Quốc tế Đà Nẵng' },
-  { label: 'Nha Trang (CXR) - Sân bay Quốc tế Cam Ranh' },
-  { label: 'Phú Quốc (PQC) - Sân bay Quốc tế Phú Quốc' },
-  { label: 'Huế (HUI) - Sân bay Phú Bài' },
-  { label: 'Cần Thơ (VCA) - Sân bay Quốc tế Cần Thơ' },
-  { label: 'Đà Lạt (DLI) - Sân bay Liên Khương' },
-  { label: 'Hải Phòng (HPH) - Sân bay Quốc tế Cát Bi' },
-  { label: 'Vinh (VII) - Sân bay Vinh' }
-  // Thêm các sân bay khác nếu cần
-]
+// const flightOptions = [
+//   { label: 'Hà Nội (HAN) - Sân bay Quốc tế Nội Bài' },
+//   { label: 'TP. Hồ Chí Minh (SGN) - Sân bay Quốc tế Tân Sơn Nhất' },
+//   { label: 'Đà Nẵng (DAD) - Sân bay Quốc tế Đà Nẵng' },
+//   { label: 'Nha Trang (CXR) - Sân bay Quốc tế Cam Ranh' },
+//   { label: 'Phú Quốc (PQC) - Sân bay Quốc tế Phú Quốc' },
+//   { label: 'Huế (HUI) - Sân bay Phú Bài' },
+//   { label: 'Cần Thơ (VCA) - Sân bay Quốc tế Cần Thơ' },
+//   { label: 'Đà Lạt (DLI) - Sân bay Liên Khương' },
+//   { label: 'Hải Phòng (HPH) - Sân bay Quốc tế Cát Bi' },
+//   { label: 'Vinh (VII) - Sân bay Vinh' }
+//   // Thêm các sân bay khác nếu cần
+// ]
 
-const FlightSearchBox = ({from = '', to = '', setFrom, setTo}) => {
-  const [departure, setDeparture] = useState(from) // Sử dụng null để Autocomplete nhận giá trị khởi tạo là không có gì
-  const [arrival, setArrival] = useState(to)
+const FlightSearchBox = ({ from = '', to = '', setFrom, setTo }) => {
+  // const [departure, setDeparture] = useState(from) // Sử dụng null để Autocomplete nhận giá trị khởi tạo là không có gì
+  // const [arrival, setArrival] = useState(to)
 
   const swapLocations = () => {
-    const temp = departure
-    setDeparture(arrival)
-    setArrival(temp)
+    const temp = from
+    setFrom(to)
+    setTo(temp)
   }
 
   return (
@@ -64,8 +65,8 @@ const FlightSearchBox = ({from = '', to = '', setFrom, setTo}) => {
         <Autocomplete
           disablePortal
           options={flightOptions.map((option) => option.label)}
-          value={departure}
-          onChange={(event, newValue) => setDeparture(newValue)} // newValue có thể là null
+          value={from}
+          onChange={(event, newValue) => setFrom(newValue)} // newValue có thể là null
           renderInput={(params) => (
             <TextField
               {...params}
@@ -141,8 +142,8 @@ const FlightSearchBox = ({from = '', to = '', setFrom, setTo}) => {
         <Autocomplete
           disablePortal
           options={flightOptions.map((option) => option.label)}
-          value={arrival}
-          onChange={(event, newValue) => setArrival(newValue)}
+          value={to}
+          onChange={(event, newValue) => setTo(newValue)}
           renderInput={(params) => (
             <TextField
               {...params}

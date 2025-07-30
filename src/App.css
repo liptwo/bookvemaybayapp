@@ -1,5 +1,7 @@
 @import "tailwindcss";
-
+@import '@fontsource/aclonica';
+@import '@fontsource-variable/montserrat';  
+@import '@fontsource-variable/inter';
 @layer utilities {
   .animate-fade-in {
     animation: fadeIn 1s ease-in;

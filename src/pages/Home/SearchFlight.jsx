@@ -1,26 +1,28 @@
-import { Button } from '@mui/material'
+import { Button, Typography } from '@mui/material'
 import { Search } from 'lucide-react'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+// import AnimatedLetters from '~/components/AnimatedLetters/AnimatedLetters'
 import FlightDatePick from '~/components/FlightDatePick/FlightDatePick'
 import FlightSearchBox from '~/components/FlightSearchBox/FlightSearchBox'
 import GuestSelector from '~/components/GuestSelector/GuestSelector'
 import SelectChairType from '~/components/SelectChairType/SelectChairType'
+import { flightOptions } from '~/utils/constants'
 
 const SearchFlight = () => {
 
   const navigate = useNavigate()
-  const [from, setFrom] = useState('SGN')
-  const [to, setTo] = useState('BKKA')
-  const [date, setDate] = useState('30-7-2025')
-  const [passengers, setPassengers] = useState({ adult: 0, child: 0, infant: 0 })
+  const [from, setFrom] = useState(flightOptions[0])
+  const [to, setTo] = useState(flightOptions[1])
+  const [date, setDate] = useState(Date.now())
+  const [passengers, setPassengers] = useState({ adults: 0, children: 0, infants: 0 })
   const [seatClass, setSeatClass] = useState('ECONOMY')
 
   const handleSearch = () => {
     const query = new URLSearchParams({
-      ap: `${from}.${to}`,
-      dt: `${date}.NA`,
-      ps: `${passengers.adult}.${passengers.child}.${passengers.infant}`,
+      ap: `${from.id}.${to.id}`,
+      dt: `${date}`,
+      ps: `${passengers.adults}.${passengers.children}.${passengers.infants}`,
       sc: seatClass
     }).toString()
 
@@ -29,8 +31,9 @@ const SearchFlight = () => {
 
 
   return (
-    <div className=''>
-      <div className='flex flex-col md:flex-row justify-between mt-50 items-center gap-y-4 md:gap-y-0 animate-fade-in'>
+    <div className='  mt-50 '>
+      <Typography fontFamily={'Montserrat Variable'} fontWeight={700} variant='h4' fontSize={30} color='white' className='flex items-center justify-center p-5 pb-10' >From Southeast Asia to the World, All Yours.</Typography>
+      <div className='flex flex-col md:flex-row justify-between items-center gap-y-4 md:gap-y-0 animate-fade-in'>
         <div>
           <Button
             className='!mr-2 !rounded-full !py-2 !px-6 !bg-[#0194f3] !text-white  !font-bold shadow-lg hover:!bg-[#007acc] hover:scale-105 transition-all duration-300 !drop-shadow-md border-2 border-transparent hover:!border-[#0194f3]'

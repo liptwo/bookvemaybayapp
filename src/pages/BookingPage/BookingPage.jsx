@@ -4,6 +4,8 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import NotFound from '../404/NotFound'
+import { Box, Container } from '@mui/material'
+import ResponsiveAppBar from '~/components/ResponsiveAppBar/ResponsiveAppBar'
 
 function BookingPage() {
   // const tripId = 'trip-123' // ID chuyến đi ví dụ
@@ -31,14 +33,23 @@ function BookingPage() {
   }, [from, to, date, sc])
 
   return (
-    <div className='flex w-[100vw] h-[100vh] flex-col justify-center items-center'>
-      <h1 className='text-4xl font-bold py-2'>
+    <div className="bg-gradient-to-b from-[#eaf6ff] to-white min-h-screen pb-10 font-sans">
+      <Container maxWidth='lg' className='relative h-43 z-10'> {/* Thêm relative z-10 để nội dung nằm trên ảnh */}
+        <Box sx={{ height: 'auto', paddingTop: 2 }}> {/* Bỏ chiều cao cố định, thêm padding */}
+          <ResponsiveAppBar textColor={'black'} />
+        </Box>
+      </Container>
+      {/* <h1 className='text-4xl font-bold py-2'>
         Chọn ghế cho chuyến đi {from} to {to}
         <br/>
         Hạng {sc}
         <br/>
         Ngày {date}
-      </h1>
+      </h1> */}
+      {flights && (flights.map((flight) => {
+        <Box> Flight {flight}</Box>
+      }))}
+      Hello
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import ResponsiveAppBar from '~/components/ResponsiveAppBar/ResponsiveAppBar'
 // import AppBarNoLogo from '~/components/ResponsiveAppBar/AppBarNoLogo' // Chưa sử dụng, có thể xóa
-import VHL from '../../asset/img/plane.png'
+import VHL from '~/asset/img/travellokaBg.webp'
 // import Trusted from '../../asset/img/trusted.png' // Chưa sử dụng, có thể xóa
 import { Box, Button, Typography } from '@mui/material' // Thêm Typography
 import Container from '@mui/material/Container'
@@ -39,7 +39,7 @@ const Home = () => {
         alt='Background Plane'
         draggable='false'
         // Giảm brightness xuống 50 để nội dung dễ đọc hơn, thêm object-bottom để hình ảnh trông đẹp hơn
-        className="absolute inset-0 w-full h-[400px] object-cover object-bottom brightness-60 z-0 transition-all duration-700"
+        className="absolute inset-0 w-full h-[600px] object-cover object-center brightness-60 z-0 transition-all duration-700"
       />
       <Container maxWidth='lg' className='relative z-10'> {/* Thêm relative z-10 để nội dung nằm trên ảnh */}
         <Box sx={{ height: 'auto', paddingTop: 2 }}> {/* Bỏ chiều cao cố định, thêm padding */}

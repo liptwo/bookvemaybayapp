@@ -12,6 +12,7 @@ import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
 import { Divider } from '@mui/material'
 import AppBarNoLogo from './AppBarNoLogo'
+import { useNavigate } from 'react-router-dom'
 
 const pages = [
   'Hợp tác với chúng tôi',
@@ -21,11 +22,11 @@ const pages = [
 ]
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 
-function ResponsiveAppBar() {
+function ResponsiveAppBar( { textColor }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null)
   const [anchorElUser, setAnchorElUser] = React.useState(null)
   const [scrolled, setScrolled] = React.useState(false)
-
+  const navigate = useNavigate()
   React.useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 35) // scroll xuống 50px là đổi màu
@@ -55,9 +56,10 @@ function ResponsiveAppBar() {
       position='fixed'
       sx={{
         transition: 'background-color 0.3s',
-        backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.9)' : 'transparent',
-        boxShadow: scrolled ? 2 : 'none',
-        backdropFilter: scrolled ? 'blur(6px)' : 'none'
+        backgroundColor: scrolled || textColor === 'black' ? 'rgba(255, 255, 255, 0.9)' : 'transparent',
+        boxShadow: scrolled || textColor === 'black' ? 2 : 'none',
+        backdropFilter: scrolled || textColor === 'black' ? 'blur(6px)' : 'none',
+
       }}
     >
       <Container maxWidth='lg'>
@@ -73,22 +75,24 @@ function ResponsiveAppBar() {
             >
               {/* logo */}
               <Typography
-                variant='h6'
+                variant='h5'
                 noWrap
                 component='a'
-                href='#app-bar-with-responsive-menu'
+                onClick={() => navigate('/')}
+                // href='#app-bar-with-responsive-menu'
                 sx={{
                   mr: 2,
                   display: {
                     xs: 'none',
                     md: 'flex',
-                    color: scrolled ? 'black' : 'white'
+                    color: scrolled || textColor === 'black' ? 'black' : 'white'
                   },
-                  fontFamily: 'monospace',
-                  fontWeight: 700,
-                  letterSpacing: '.3rem',
+                  fontFamily: 'Aclonica',
+                  fontWeight: 800,
+                  letterSpacing: '.2rem',
                   color: 'inherit',
-                  textDecoration: 'none'
+                  textDecoration: 'none',
+                  cursor: 'pointer'
                 }}
               >
                 Booking
@@ -153,25 +157,32 @@ function ResponsiveAppBar() {
                 sx={{
                   flexGrow: 1,
                   display: { xs: 'none', md: 'flex' },
-                  justifyContent: 'flex-end'
+                  justifyContent: 'flex-end',
+                  gap: 3
                 }}
               >
                 {pages.map((page) => (
-                  <Button
+                  <Box
                     key={page}
                     onClick={handleCloseNavMenu}
                     sx={{
+                      cursor: 'pointer',
                       my: 2,
                       display: 'block',
-                      color: scrolled ? 'black' : 'white',
-                      fontWeight: 700
+                      color: scrolled || textColor === 'black' ? 'black' : 'white',
+                      fontWeight: 600,
+                      fontSize: 13,
+                      fontFamily: 'Montserrat Variable',
+                      // '& :active' : {
+
+                      // }
                     }}
                   >
                     {page}
-                  </Button>
+                  </Box>
                 ))}
               </Box>
-              <Box sx={{ flexGrow: 0 }}>
+              <Box sx={{ flexGrow: 0, ml:1}}>
                 <Tooltip title='Open settings'>
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <Avatar
@@ -207,16 +218,23 @@ function ResponsiveAppBar() {
                 </Menu>
               </Box>
             </Box>
-            <Box sx={{ display: { xs: 'none', md: 'block' } }}>
-              <Divider sx={{
-                // borderBottomWidth: '2px',
-                borderColor: 'white'
-              }}/>
-              <AppBarNoLogo></AppBarNoLogo>
-            </Box>
+            {/* <Box sx={{ display: { xs: 'none', md: 'block' } }}> */}
+            {/* </Box> */}
           </Box>
         </Toolbar>
       </Container>
+      <Divider sx={{
+        // borderBottomWidth: '2px',
+        opacity: 0.15,
+        borderColor: scrolled || textColor === 'black' ? 'black' : 'gray'
+      }}/>
+      <AppBarNoLogo textColor={textColor} />
+
+      <Divider sx={{
+        // borderBottomWidth: '0.5px',
+        opacity: scrolled ? 0 : 0.15,
+        borderColor: scrolled || textColor === 'black' ? 'black' : 'gray'
+      }}/>
     </AppBar>
   )
 }

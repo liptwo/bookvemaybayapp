@@ -16,11 +16,11 @@ import {
   UsersRound
 } from 'lucide-react'
 
-const GuestSelector = () => {
+const GuestSelector = ( { passengers, setPassengers }) => {
   const [anchorEl, setAnchorEl] = useState(null)
-  const [adults, setAdults] = useState(1)
-  const [children, setChildren] = useState(0)
-  const [infants, setInfants] = useState(0)
+  const [adults, setAdults] = useState(passengers.adults)
+  const [children, setChildren] = useState(passengers.children)
+  const [infants, setInfants] = useState(passengers.infants)
 
   const handleOpen = (event) => {
     setAnchorEl(event.currentTarget)
@@ -31,10 +31,24 @@ const GuestSelector = () => {
   }
 
   const open = Boolean(anchorEl)
-
   const updateCount = (setter, value) => {
-    setter((prev) => Math.max(0, prev + value))
+    setter((prev) => {
+      const newCount = Math.max(0, prev + value)
+      // Cập nhật state cục bộ trước
+      // Sau đó cập nhật prop setPassengers với giá trị MỚI của tất cả các loại hành khách
+      // Dựa vào giá trị state hiện tại và giá trị mới của loại hành khách đang thay đổi
+      if (setter === setAdults) {
+        setPassengers({ adults: newCount, children, infants })
+      } else if (setter === setChildren) {
+        setPassengers({ adults, children: newCount, infants })
+      } else if (setter === setInfants) {
+        setPassengers({ adults, children, infants: newCount })
+      }
+      return newCount // Trả về giá trị mới để cập nhật state cục bộ
+    })
+    // console.log(passengers)
   }
+
 
   return (
     <Box >
