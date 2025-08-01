@@ -11,6 +11,9 @@ import { styled } from '@mui/material/styles'
 import { PlaneTakeoff } from 'lucide-react'
 import Icon from '@mui/material/Icon'
 import LooksOneIcon from '@mui/icons-material/LooksOne'
+import dayjs from 'dayjs'
+import LooksTwoIcon from '@mui/icons-material/LooksTwo';
+
 
 function BookingPage() {
   // const tripId = 'trip-123' // ID chuyến đi ví dụ
@@ -58,26 +61,84 @@ function BookingPage() {
       <Container>
         <Grid container spacing={2}>
           <Grid size={4}>
-            <Box sx={{ backgroundColor: 'white', height: '300px', width: 'auto' }}>
-              <Box sx={{ display: 'flex', gap: 1, p: 2}}>
-                <PlaneTakeoff color='#5683e9' />
-                <Typography sx={{fontWeight: 'bold'}}>Your Flight</Typography>
+            <Box>
+              <Box sx={{ backgroundColor: 'white', maxHeight: '300px', width: 'auto' ,borderRadius: '8px', boxShadow: 1, overflow: 'hidden'}}>
+                <Box sx={{ borderBottom: '1px solid #ddd', display: 'flex', gap: 1, p: 2}}>
+                  <PlaneTakeoff color='#5683e9' />
+                  <Typography sx={{fontWeight: 'bold'}}>Your Flight</Typography>
+                </Box>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    gap: 2,
+                    p: 2,
+                    alignItems: 'center',
+                    borderBottom: '1px solid #ddd',
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      borderRadius: '8px',
+                      width: 48,
+                      height: 48,
+                      backgroundColor: 'white'
+                    }}
+                  >
+                    <LooksOneIcon sx={{ color: '#5683e9', fontSize: 28 }} />
+                  </Box>
+                  <Box>
+                    <Typography variant="body2" color="text.secondary">
+                      Thu, 31 Jul 2025
+                    </Typography>
+                    <Typography variant="subtitle1" sx={{ fontWeight: 'bold', color: '#0072ce' }}>
+                      Ho C. M. City → Bangkok
+                    </Typography>
+                  </Box>
+                </Box>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    gap: 2,
+                    p: 2,
+                    alignItems: 'center',
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      borderRadius: '8px',
+                      width: 48,
+                      height: 48,
+                      backgroundColor: 'white'
+                    }}
+                  >
+                    <LooksTwoIcon sx={{ color: '#5683e9', fontSize: 28 }} />
+                  </Box>
+                  <Box>
+                    <Typography variant="body2" color="text.secondary">
+                      Thu, 31 Jul 2025
+                    </Typography>
+                    <Typography variant="subtitle1" sx={{ fontWeight: 'bold', color: '#0072ce' }}>
+                      Ho C. M. City → Bangkok
+                    </Typography>
+                  </Box>
+                </Box>
               </Box>
-              <Box
-                sx={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  borderRadius: '8px',
-                  width: 48,
-                  height: 48,
-                  backgroundColor: 'white',
-                }}
-              >
-                <LooksOneIcon sx={{ color: '#5683e9', fontSize: 28 }} />
-              </Box>
-
             </Box>
+            <Box sx={{maxHeight: '300px', width: 'auto', boxShadow: 1, overflow: 'hidden'}}>
+              <Box sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 2, backgroundColor: '#f5f5f5'}}>
+                <Typography variant="h6" sx={{fontWeight : 'bold'}}>Filter</Typography>
+                <Typography variant="h8" sx={{color:'#5683e9', fontWeight:'medium'}}>Reset</Typography>
+              </Box>
+              <Box></Box>
+              <Box></Box>
+            </Box>
+            <Box></Box>
           </Grid>
           <Grid size={8}>
             <Box sx={{ backgroundColor: 'black', height: '300px', width: 'auto'}}>
