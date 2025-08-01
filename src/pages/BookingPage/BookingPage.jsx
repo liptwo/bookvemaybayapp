@@ -12,10 +12,13 @@ import { PlaneTakeoff } from 'lucide-react'
 import Icon from '@mui/material/Icon'
 import LooksOneIcon from '@mui/icons-material/LooksOne'
 import dayjs from 'dayjs'
-import LooksTwoIcon from '@mui/icons-material/LooksTwo';
+import { ChevronUp } from 'lucide-react'
+import LooksTwoIcon from '@mui/icons-material/LooksTwo'
+import Checkbox from '@mui/material/Checkbox'
 
 
 function BookingPage() {
+  const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
   // const tripId = 'trip-123' // ID chuyến đi ví dụ
   const [params] = useSearchParams()
   const [flights, setFlights] = useState([])
@@ -61,7 +64,7 @@ function BookingPage() {
       <Container>
         <Grid container spacing={2}>
           <Grid size={4}>
-            <Box>
+            <Box sx ={{pb:2}}  >
               <Box sx={{ backgroundColor: 'white', maxHeight: '300px', width: 'auto' ,borderRadius: '8px', boxShadow: 1, overflow: 'hidden'}}>
                 <Box sx={{ borderBottom: '1px solid #ddd', display: 'flex', gap: 1, p: 2}}>
                   <PlaneTakeoff color='#5683e9' />
@@ -130,13 +133,27 @@ function BookingPage() {
                 </Box>
               </Box>
             </Box>
-            <Box sx={{maxHeight: '300px', width: 'auto', boxShadow: 1, overflow: 'hidden'}}>
-              <Box sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 2, backgroundColor: '#f5f5f5'}}>
-                <Typography variant="h6" sx={{fontWeight : 'bold'}}>Filter</Typography>
+            <Box sx={{maxHeight: '300px', width: 'auto', boxShadow: 1, overflow: 'hidden', display:'flex', flexDirection:'column'}}>
+              <Box sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 1, backgroundColor: '#f7fcff'}}>
+                <Typography variant="h6" sx={{fontWeight : 'bold'}}>Filter :</Typography>
                 <Typography variant="h8" sx={{color:'#5683e9', fontWeight:'medium'}}>Reset</Typography>
               </Box>
-              <Box></Box>
-              <Box></Box>
+              <Box sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 1, backgroundColor: '#f7fcff'}}c>
+                <Typography variant='h6'>No. of Transit </Typography>
+                <ChevronUp/>
+              </Box>
+              <Box sx={{}}>
+                <Box sx ={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 1, backgroundColor: '#f7fcff'}}>
+                  <Box sx = {{display: 'flex', alignItems: 'center', gap: 1}}>
+                    <Checkbox {...label} defaultChecked />
+                    <Typography sx={{fontWeight:'700'}}>Direct</Typography>
+                  </Box>
+                  <Typography>1.442.750 VND </Typography>
+                </Box>
+                <Box></Box>
+                <Box></Box>
+
+              </Box>
             </Box>
             <Box></Box>
           </Grid>
