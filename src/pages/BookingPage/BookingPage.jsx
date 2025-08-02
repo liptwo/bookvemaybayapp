@@ -4,8 +4,9 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import NotFound from '../404/NotFound'
-import { Box, Container } from '@mui/material'
-import ResponsiveAppBar from '~/components/ResponsiveAppBar/ResponsiveAppBar'
+import { Box, Container, Grid, Typography } from '@mui/material'
+// import ResponsiveAppBar from '~/components/ResponsiveAppBar/ResponsiveAppBar'
+import AppBarCustom from '~/components/ResponsiveAppBar/AppBarCustom'
 
 function BookingPage() {
   // const tripId = 'trip-123' // ID chuyến đi ví dụ
@@ -17,8 +18,8 @@ function BookingPage() {
   const ps = params.get('ps') || ''
   const sc = params.get('sc') || 'ECONOMY'
 
-  if (ap==='' || dt==='' || ps==='' || sc==='') {
-    return <NotFound title={'Không tìm thấy chuyến bay này'}/>
+  if (ap === '' || dt === '' || ps === '' || sc === '') {
+    return <NotFound title={'Không tìm thấy chuyến bay này'} />
   }
 
   const [from, to] = ap.split('.')
@@ -33,10 +34,14 @@ function BookingPage() {
   }, [from, to, date, sc])
 
   return (
-    <div className="bg-gradient-to-b from-[#eaf6ff] to-white min-h-screen pb-10 font-sans">
-      <Container maxWidth='lg' className='relative h-43 z-10'> {/* Thêm relative z-10 để nội dung nằm trên ảnh */}
-        <Box sx={{ height: 'auto', paddingTop: 2 }}> {/* Bỏ chiều cao cố định, thêm padding */}
-          <ResponsiveAppBar textColor={'black'} />
+    <div className='bg-gradient-to-b from-[#eaf6ff] to-white min-h-screen pb-10 font-sans'>
+      <Container maxWidth='lg' className='relative h-43 z-10'>
+        {' '}
+        {/* Thêm relative z-10 để nội dung nằm trên ảnh */}
+        <Box sx={{ height: 'auto', paddingTop: 2 }}>
+          {' '}
+          {/* Bỏ chiều cao cố định, thêm padding */}
+          <AppBarCustom textColor={'black'} />
         </Box>
       </Container>
       {/* <h1 className='text-4xl font-bold py-2'>
@@ -46,10 +51,24 @@ function BookingPage() {
         <br/>
         Ngày {date}
       </h1> */}
-      {flights && (flights.map((flight) => {
+      <Container>
+        <Grid container spacing={2}>
+          <Grid size={4}>
+            <Box
+              sx={{ backgroundColor: 'black', height: '300px', width: 'auto' }}
+            >
+              <Typography color={'white'}>size=8</Typography>
+            </Box>
+          </Grid>
+          <Grid size={8}>
+            <Typography>size=8</Typography>
+          </Grid>
+        </Grid>
+      </Container>
+      {/* {flights && (flights.map((flight) => {
         <Box> Flight {flight}</Box>
       }))}
-      Hello
+      Hello */}
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import ResponsiveAppBar from '~/components/ResponsiveAppBar/ResponsiveAppBar'
+
 // import AppBarNoLogo from '~/components/ResponsiveAppBar/AppBarNoLogo' // Chưa sử dụng, có thể xóa
 import VHL from '~/asset/img/travellokaBg.webp'
 // import Trusted from '../../asset/img/trusted.png' // Chưa sử dụng, có thể xóa
@@ -29,10 +29,11 @@ import r3 from '../../asset/img/r3.png'
 // import FlightSearchBox from '~/components/FlightSearchBox/FlightSearchBox'
 // import FlightDatePick from '~/components/FlightDatePick/FlightDatePick'
 import SearchFlight from './SearchFlight'
+import AppBarCustom from '~/components/ResponsiveAppBar/AppBarCustom'
 
 const Home = () => {
   return (
-    <div className="bg-gradient-to-b from-[#eaf6ff] to-white min-h-screen pb-10 font-sans">
+    <div className=" min-h-screen pb-10 font-sans">
       {/* Banner và Thanh điều hướng */}
       <img
         src={VHL}
@@ -41,10 +42,10 @@ const Home = () => {
         // Giảm brightness xuống 50 để nội dung dễ đọc hơn, thêm object-bottom để hình ảnh trông đẹp hơn
         className="absolute inset-0 w-full h-[600px] object-cover object-center brightness-60 z-0 transition-all duration-700"
       />
-      <Container maxWidth='lg' className='relative z-10'> {/* Thêm relative z-10 để nội dung nằm trên ảnh */}
-        <Box sx={{ height: 'auto', paddingTop: 2 }}> {/* Bỏ chiều cao cố định, thêm padding */}
-          <ResponsiveAppBar />
-        </Box>
+      <Container maxWidth='lg' className='relative z-10 '> {/* Thêm relative z-10 để nội dung nằm trên ảnh */}
+        {/* <Box sx={{ height: 'auto', paddingTop: 2 }} className='bg-transparent'> Bỏ chiều cao cố định, thêm padding */}
+        <AppBarCustom />
+        {/* </Box> */}
         {/* Form tìm kiếm */}
         <SearchFlight></SearchFlight>
 
