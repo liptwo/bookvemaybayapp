@@ -65,7 +65,7 @@ function BookingPage() {
       <Container>
         <Grid container spacing={2}>
           <Grid size={4}>
-            <Box sx={{ borderRadius: '8px', boxShadow: 1, height: '100%' ,display: 'flex', flexDirection: 'column', gap: 2, padding: 2 }}> 
+            <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column', gap: 2 }}> 
               <Box sx ={{ }} >
                 <Box sx={{ backgroundColor: 'white', maxHeight: '300px', width: 'auto', borderRadius: '8px', boxShadow: 1, overflow: 'hidden' }}>
                   <Box sx={{ borderBottom: '1px solid #ddd', display: 'flex', gap: 1, p: 2 }}>
