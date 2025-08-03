@@ -8,6 +8,7 @@ import Auth from '~/pages/Auth/Auth'
 import './App.css'
 import BookingPage from './pages/BookingPage/BookingPage'
 import Home from './pages/Home/Home'
+import StaffChat from './components/Chat/StaffChat'
 // Cách 2 xử lý đã đăng nhập
 // * Giải pháp Clean Code trong việc xác định các route nào cần đăng nhập tài khoản xong thì mới cho truy cập
 // * Sử dụng <Outlet /> của react-router-dom để hiển thị các Child Route (xem cách sử dụng trong App() bên
@@ -49,6 +50,7 @@ function App() {
 
       <Route path='/login' element={<Auth />} />
       <Route path='/register' element={<Auth />} />
+      <Route path='/staffchat' element={<StaffChat />}></Route>
 
       {/* <Route path='/account/verification' element={<AccountVerification />}/> */}
       // 404 not found page

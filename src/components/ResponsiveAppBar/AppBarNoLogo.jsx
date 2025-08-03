@@ -104,7 +104,7 @@ function AppBarNoLogo({ textColor }) {
                       '&:hover': {
                         border: `1px solid ${textColor === 'black' ? 'black' : 'white'}`
                       },
-                      ...(page.title === 'Vé máy bay' && { backgroundColor: textColor === 'black' ? 'black':'white', color: textColor === 'black' ? 'white': 'black' })
+                      ...(page.title === 'Vé máy bay' && { backgroundColor: textColor === 'black' ? 'black' : 'white', color: textColor === 'black' ? 'white' : 'black' })
                     }}
                   >
                     {page.icon}
@@ -115,14 +115,14 @@ function AppBarNoLogo({ textColor }) {
             </Menu>
           </Box>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap:1 }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: 1 }}>
             {pages.map((page, i) => (
               <Button
                 key={i}
                 onClick={handleCloseNavMenu}
                 sx={{
                   px: 2,
-                  py:1,
+                  py: 1,
                   color: scrolled || textColor === 'black' ? 'black' : 'white',
                   gap: 2,
                   display: 'flex',
@@ -134,7 +134,7 @@ function AppBarNoLogo({ textColor }) {
                   '&:hover': {
                     border: `1px solid ${textColor === 'black' ? 'black' : 'white'}`
                   },
-                  ...(page.title === 'Vé máy bay' && { backgroundColor: scrolled || textColor === 'black' ? 'black':'white', color: scrolled || textColor === 'black' ? 'white': 'black' })
+                  ...(page.title === 'Vé máy bay' && { backgroundColor: scrolled || textColor === 'black' ? 'black' : 'white', color: scrolled || textColor === 'black' ? 'white' : 'black' })
                 }}
               >
                 {page.icon}
