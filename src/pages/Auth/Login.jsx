@@ -11,6 +11,8 @@ import { Mail } from 'lucide-react'
 import InputAdornment from '@mui/material/InputAdornment'
 // import { Navigate } from 'react-router-dom'
 import Checkbox from '@mui/material/Checkbox'
+import { LogIn } from 'lucide-react';
+import { TypeAnimation } from 'react-type-animation'
 
 export default function Login() {
   const navigate = useNavigate()
