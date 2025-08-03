@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { DayPicker } from 'react-day-picker'
 import { CalendarDays } from 'lucide-react'
 import 'react-day-picker/dist/style.css'
@@ -6,14 +6,23 @@ import { format } from 'date-fns'
 import vi from 'date-fns/locale/vi'
 import { toast } from 'react-toastify'
 
-export default function FlightDatePick() {
+export default function FlightDatePick({setDate}) {
   const [startDate, setStartDate] = useState(new Date())
   const [returnDate, setReturnDate] = useState(new Date())
   const [showStartPicker, setShowStartPicker] = useState(false)
   const [showReturnPicker, setShowReturnPicker] = useState(false)
   const [isRoundTrip, setIsRoundTrip] = useState(false)
 
+  useEffect(() => {
+    const formattedStartDate = format(startDate, 'd-M-yyyy', { locale: vi });
 
+    // Định dạng returnDate nếu có, hoặc giữ nguyên 'NA'
+    const formattedReturnDate = isRoundTrip && returnDate && !isNaN(returnDate)
+      ? format(returnDate, 'd-M-yyyy', { locale: vi })
+      : 'NA';
+
+    setDate(`${formattedStartDate}.${formattedReturnDate}`)
+  }, [startDate, returnDate])
   return (
     <div className='flex flex-row gap-4 text-white items-center'>
       <div className='flex flex-col gap-0.5'>

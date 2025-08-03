@@ -4,12 +4,13 @@ import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 import { Box } from '@mui/material' // Import Box để bọc và thêm padding/margin
+import { TYPESEATS } from '~/utils/constants'
 
-export default function SelectChairType() {
-  const [type, setType] = React.useState('')
+export default function SelectChairType( {seatClass, setSeatClass}) {
+  // const [type, setType] = React.useState('')
 
   const handleChange = (event) => {
-    setType(event.target.value)
+    setSeatClass(event.target.value)
   }
 
   return (
@@ -55,7 +56,7 @@ export default function SelectChairType() {
         <Select
           labelId='chair-type-select-label'
           id='chair-type-select'
-          value={type}
+          value={seatClass}
           label='Chọn ghế ngồi' // Quan trọng: label cần được truyền vào Select khi variant là 'outlined' hoặc 'filled'
           onChange={handleChange}
           MenuProps={{
@@ -70,10 +71,11 @@ export default function SelectChairType() {
           }}
         >
           {/* MenuItems sẽ tự động kế thừa màu chữ từ Popover nếu không set riêng */}
-          <MenuItem value={10}>Phổ thông</MenuItem>
-          <MenuItem value={20}>Phổ thông đặc biệt</MenuItem>
-          <MenuItem value={30}>Thương gia</MenuItem>
-          <MenuItem value={40}>Hạng nhất</MenuItem>
+          {Object.entries(TYPESEATS).map(([key, label]) => (
+            <MenuItem key={key} value={key}>
+              {label}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
     </Box>
