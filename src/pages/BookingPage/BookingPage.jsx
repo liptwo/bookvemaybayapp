@@ -16,7 +16,9 @@ import { ChevronUp } from 'lucide-react'
 import LooksTwoIcon from '@mui/icons-material/LooksTwo'
 import Checkbox from '@mui/material/Checkbox'
 import { CheckBox } from '@mui/icons-material'
-
+import { Luggage } from 'lucide-react'
+import { Wifi } from 'lucide-react'
+import { Minus } from 'lucide-react'
 
 function BookingPage() {
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
@@ -63,8 +65,8 @@ function BookingPage() {
       )))}
 
       <Container>
-        <Grid container spacing={2}>
-          <Grid size={4}>
+        <Grid container spacing={2} sx={{ gap: 2, padding: 2, marginTop: 2 }}>
+          <Grid size={4} >
             <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column', gap: 2 }}> 
               <Box sx ={{ }} >
                 <Box sx={{ backgroundColor: 'white', maxHeight: '300px', width: 'auto', borderRadius: '8px', boxShadow: 1, overflow: 'hidden' }}>
@@ -280,8 +282,42 @@ function BookingPage() {
             </Box>
           </Grid>
           <Grid size={8}>
-            <Box sx={{ backgroundColor: 'black', height: '300px', width: 'auto' }}>
-              <Typography color={'white'}>size=8</Typography>
+            <Box sx={{ height: '300px', width: 'auto', marginLeft:4 }}>
+              <Box sx={{ }}>
+                <Typography variant='subtitle1' sx={{ fontWeight:'bold' }}> Tất cả chuyến bay</Typography>
+                <Box sx={{ borderRadius:'4px', backgroundColor:'white'}} >
+                  <Box sx={{ mt:1, display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 2, borderBottom:'1px solid #ddd' }}>
+                    <Box sx={{}}>
+                      <Box sx={{ pl:2, display: 'flex', alignItems: 'center', gap: 1, height: '50px', borderRadius:'8px' }}>
+                        <img src="https://ik.imagekit.io/tvlk/image/imageResource/2022/09/05/1662367350709-4f8ec277cdb9116b3913a2f2d614e590.png?tr=dpr-2,h-24,q-75"
+                          alt="hình ảnh Thai AirAsia" style={{ width:30 }}/>
+                        <Typography variant='subtitle1' sx={{ fontWeight:'700'}}>Thai AirAsia</Typography>
+                      </Box>
+                      <Box sx={{ display:'flex', maxWidth:'70px', borderRadius:'15px', border:'1px solid #ddd', padding:'3px', alignItems:'center', gap:1, marginLeft:2 }}>
+                        <Luggage/>0
+                        <Wifi/>
+                      </Box>
+                    </Box>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      <Box>
+                        <Typography>11:55</Typography>
+                        <Typography sx={{ color:'#687176' }}>BKK</Typography>
+                      </Box>
+                      <Box sx={{alignItems:'center', display:'flex', flexDirection:'column', color:'#687176', fontSize:'12px' }}>
+                        <Typography sx={{fontSize:'12px'}} >1h 55m</Typography>
+                        <Typography variant='h7' sx={{ color:'#687176', display:'flex', alignItems:'center' }}>
+                          <Minus size={30} />
+                          Bay thẳng
+                          <Minus size={30} />
+
+                        </Typography>
+                      </Box>
+                    </Box>
+                    <Box></Box>
+                  </Box>
+                  <Box></Box>
+                </Box>
+              </Box>
             </Box>
           </Grid>
         </Grid>
