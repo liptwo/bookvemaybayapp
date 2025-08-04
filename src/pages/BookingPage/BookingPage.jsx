@@ -148,15 +148,31 @@ function BookingPage() {
                   <Typography variant="h6" sx={{ fontWeight : 'bold' }}>Filter :</Typography>
                   <Typography variant="h8" sx={{ color:'#5683e9', fontWeight:'medium' }}>Reset</Typography>
                 </Box>
-                <Accordion sx={{ backgroundColor:'#f4fbff' }}>
+                <Accordion
+                  disableGutters
+                  square
+                  elevation={0}
+                  sx={{
+                    backgroundColor:'#f4fbff',
+                    margin: 0,
+                    padding: 0,
+                    borderBottom: '1px solid #ddd' // thêm nếu bạn muốn có đường kẻ phân cách
+                  }}
+                >
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1-content"
-                    id="panel1-header"
+                    sx={{
+                      minHeight: 40,
+                      paddingY: 0,
+                      paddingX: 2,
+                      '& .MuiAccordionSummary-content': {
+                        margin: 0
+                      }
+                    }}
                   >
                     <Typography sx={{fontWeight:'700'}}>No. of Transits</Typography>
                   </AccordionSummary>
-                  <AccordionDetails>
+                  <AccordionDetails sx={{ paddingY: 1, paddingX: 2 }}>
 
                     <Box sx ={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 1}}>
                       <Box sx = {{ display: 'flex', alignItems: 'center' }}>
@@ -183,15 +199,30 @@ function BookingPage() {
 
                   </AccordionDetails>
                 </Accordion>
-                <Accordion sx={{backgroundColor:'#f4fbff' }}>
+                <Accordion
+                  disableGutters
+                  square
+                  elevation={0}
+                  sx={{
+                    backgroundColor:'#f4fbff',
+                    margin: 0,
+                    padding: 0
+                  }}
+                >
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1-content"
-                    id="panel1-header"
+                    sx={{
+                      minHeight: 40,
+                      paddingY: 0,
+                      paddingX: 2,
+                      '& .MuiAccordionSummary-content': {
+                        margin: 0
+                      }
+                    }}
                   >
                     <Typography sx={{fontWeight:'700'}}>AirLine</Typography>
                   </AccordionSummary>
-                  <AccordionDetails>
+                  <AccordionDetails sx={{ paddingY: 1, paddingX: 2 }}>
                     <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
 
                       <Box sx={{ display: 'flex', backgroundColor: '#f7fcff', padding: 1, alignItems: 'center', gap: 1 }}>
