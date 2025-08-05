@@ -1,36 +1,34 @@
 // import SeatMap from '~/components/SeatMap'
 // import { mockSeats } from '~/utils/mock'
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import NotFound from '../404/NotFound'
-import { Box, Container } from '@mui/material'
-import ResponsiveAppBar from '~/components/ResponsiveAppBar/ResponsiveAppBar'
-import { Grid, Paper, Typography } from '@mui/material'
-import { styled } from '@mui/material/styles'
-import { Check, PlaneTakeoff } from 'lucide-react'
-import Icon from '@mui/material/Icon'
-import LooksOneIcon from '@mui/icons-material/LooksOne'
-import dayjs from 'dayjs'
+import { Box, Checkbox, Container, Grid, Typography } from '@mui/material'
+// import ResponsiveAppBar from '~/components/ResponsiveAppBar/ResponsiveAppBar'
+import AppBarCustom from '~/components/ResponsiveAppBar/AppBarCustom'
+import ListFlight from './ListFlight'
+import { useDispatch } from 'react-redux'
+import { fetchFlightsAPI } from '~/redux/item/useFlight'
+// import DrawerConfirm from './DrawerConfirm/DrawerConfirm'
+// import { selectCurrentUser } from '~/redux/user/userSlice'
+// import { toast } from 'react-toastify'
+import { PlaneTakeoff } from 'lucide-react'
+import { Binoculars } from 'lucide-react'
 import { ChevronUp } from 'lucide-react'
-import LooksTwoIcon from '@mui/icons-material/LooksTwo'
-import Checkbox from '@mui/material/Checkbox'
-import { CheckBox } from '@mui/icons-material'
-
-
+import { flightOptions } from '~/utils/constants'
 function BookingPage() {
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
-  // const tripId = 'trip-123' // ID chuyến đi ví dụ
   const [params] = useSearchParams()
-  const [flights, setFlights] = useState([])
 
+  const dispatch = useDispatch()
   const ap = params.get('ap') || ''
   const dt = params.get('dt') || ''
   const ps = params.get('ps') || ''
   const sc = params.get('sc') || 'ECONOMY'
 
-  if (ap==='' || dt==='' || ps==='' || sc==='') {
-    return <NotFound title={'Không tìm thấy chuyến bay này'}/>
+  if (ap === '' || dt === '' || ps === '' || sc === '') {
+    return <NotFound title={'Không tìm thấy chuyến bay này'} />
   }
 
   const [from, to] = ap.split('.')
@@ -39,18 +37,21 @@ function BookingPage() {
 
   useEffect(() => {
     // Giả sử gọi API backend
-    fetch(`/api/flights?from=${from}&to=${to}&date=${date}&class=${sc}`)
-      .then((res) => res.json())
-      .then((data) => setFlights(data))
-  }, [from, to, date, sc])
+    const query = `departureAirport=${from}&arrivalAirport=${to}&departureDate=${date}&class=${sc}`
+    dispatch(fetchFlightsAPI(query))
+  }, [])
 
   return (
-    <div className="bg-gradient-to-b from-[#eaf6ff] to-white min-h-screen pb-10 font-sans">
-      <Container maxWidth='lg' className='relative h-43 z-10'> {/* Thêm relative z-10 để nội dung nằm trên ảnh */}
-        <Box sx={{ height: 'auto', paddingTop: 2 }}> {/* Bỏ chiều cao cố định, thêm padding */}
-          <ResponsiveAppBar textColor={'black'} />
-        </Box>
-      </Container>
+    <div className='min-h-screen font-sans bg-[#f7f9fa]'>
+      {/* <Container maxWidth='lg' className='relative h-110 z-10'>
+        {' '}
+        {/* Thêm relative z-10 để nội dung nằm trên ảnh */}
+      {/* <Box sx={{ height: 'auto', paddingTop: 2 }}>
+          {' '}
+          Bỏ chiều cao cố định, thêm padding */}
+      <AppBarCustom textColor={'black'} justResponeAppBar={true} />
+      {/* </Box> */}
+      {/* </Container> */}
       {/* <h1 className='text-4xl font-bold py-2'>
         Chọn ghế cho chuyến đi {from} to {to}
         <br/>
@@ -58,18 +59,14 @@ function BookingPage() {
         <br/>
         Ngày {date}
       </h1> */}
-      {flights && (flights.map((flight) => (
-        <Box> Flight {flight}</Box>
-      )))}
-
-      <Container>
+      <Container className='pt-25'>
         <Grid container spacing={2}>
           <Grid size={4}>
             <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column', gap: 2 }}> 
               <Box sx ={{ }} >
                 <Box sx={{ backgroundColor: 'white', maxHeight: '300px', width: 'auto', borderRadius: '8px', boxShadow: 1, overflow: 'hidden' }}>
                   <Box sx={{ borderBottom: '1px solid #ddd', display: 'flex', gap: 1, p: 2 }}>
-                    <PlaneTakeoff color='#5683e9' />
+                    <PlaneTakeoff size={24} color='#5683e9' />
                     <Typography sx={{ fontWeight: 'bold' }}>Your Flight</Typography>
                   </Box>
                   <Box
@@ -92,14 +89,14 @@ function BookingPage() {
                         backgroundColor: 'white'
                       }}
                     >
-                      <LooksOneIcon sx={{ color: '#5683e9', fontSize: 28 }} />
+                      <Binoculars sx={{ color: '#5683e9', fontSize: 28 }} />
                     </Box>
                     <Box>
                       <Typography variant="body2" color="text.secondary">
-                        Thu, 31 Jul 2025
+                        {date}
                       </Typography>
                       <Typography variant="subtitle1" sx={{ fontWeight: 'bold', color: '#0072ce' }}>
-                        Ho C. M. City → Bangkok
+                        {from} → {to}
                       </Typography>
                     </Box>
                   </Box>
@@ -122,14 +119,14 @@ function BookingPage() {
                         backgroundColor: 'white'
                       }}
                     >
-                      <LooksTwoIcon sx={{ color: '#5683e9', fontSize: 28 }} />
+                      <Binoculars sx={{ color: '#5683e9', fontSize: 28 }} />
                     </Box>
                     <Box>
                       <Typography variant="body2" color="text.secondary">
-                        Thu, 31 Jul 2025
+                        {date}
                       </Typography>
                       <Typography variant="subtitle1" sx={{ fontWeight: 'bold', color: '#0072ce' }}>
-                        Ho C. M. City → Bangkok
+                        {from} → {to}
                       </Typography>
                     </Box>
                   </Box>
@@ -280,12 +277,16 @@ function BookingPage() {
             </Box>
           </Grid>
           <Grid size={8}>
-            <Box sx={{ backgroundColor: 'black', height: '300px', width: 'auto' }}>
-              <Typography color={'white'}>size=8</Typography>
-            </Box>
+            <ListFlight />
           </Grid>
         </Grid>
       </Container>
+
+
+      {/* {flights && (flights.map((flight) => {
+        <Box> Flight {flight}</Box>
+      }))}
+      Hello */}
     </div>
   )
 }
