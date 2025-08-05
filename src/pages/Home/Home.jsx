@@ -29,9 +29,14 @@ import r3 from '../../asset/img/r3.png'
 // import FlightSearchBox from '~/components/FlightSearchBox/FlightSearchBox'
 // import FlightDatePick from '~/components/FlightDatePick/FlightDatePick'
 import SearchFlight from './SearchFlight'
+import UserChat from '~/components/Chat/UserChat'
 import AppBarCustom from '~/components/ResponsiveAppBar/AppBarCustom'
 
 const Home = () => {
+  const [showChat, setShowChat] = React.useState(false)
+  const toggleChat = () => {
+      setShowChat(prev => !prev);
+  }
   return (
     <div className=" min-h-screen pb-10 font-sans">
       {/* Banner và Thanh điều hướng */}
