@@ -2,7 +2,7 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import { interceptorLoadingElements } from './fomatters'
 import { refreshTokenAPI } from '~/apis'
-import { logoutUserAPI } from '~/redux/user/userSlice'
+import { logoutUserAPI } from '~/redux/item/userSlice'
 
 /**
 * Thông thể import { store } from '~/redux/store' theo cách thông thường ở đây

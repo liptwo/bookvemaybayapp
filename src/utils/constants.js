@@ -19,4 +19,9 @@ export const TYPESEATS = {
   FIRT: 'Hạng Nhất'
 }
 
+export const STATUS = {
+  CONFIRMED: 'confirmed',
+  PENDING: 'pending'
+}
+
 export const API_ROOT = apiRoot

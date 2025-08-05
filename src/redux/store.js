@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { userReducer } from './user/userSlice'
+import { userReducer } from './item/userSlice'
 
 // * Cầu hình redux-persist
 // * https://www.npmjs.com/package/redux-persist
@@ -8,6 +8,8 @@ import { userReducer } from './user/userSlice'
 import { combineReducers } from 'redux'
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
+import { flightsReducer } from './item/useFlight'
+import { activeNotiReducer } from './item/useNoti'
 
 // Cấu hình persist
 const rootPersistConfig = {
@@ -20,7 +22,9 @@ const rootPersistConfig = {
 
 // Combine các reducers trong dự án của chúng ta ở đây
 const reducers = combineReducers({
-  user: userReducer
+  user: userReducer,
+  flights: flightsReducer,
+  noti: activeNotiReducer
 })
 
 // thực hiện persist reducers

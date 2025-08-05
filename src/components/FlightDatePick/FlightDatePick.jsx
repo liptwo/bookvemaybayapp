@@ -14,12 +14,12 @@ export default function FlightDatePick({setDate}) {
   const [isRoundTrip, setIsRoundTrip] = useState(false)
 
   useEffect(() => {
-    const formattedStartDate = format(startDate, 'd-M-yyyy', { locale: vi });
+    const formattedStartDate = format(startDate, 'yyyy-M-dd', { locale: vi });
 
     // Định dạng returnDate nếu có, hoặc giữ nguyên 'NA'
     const formattedReturnDate = isRoundTrip && returnDate && !isNaN(returnDate)
-      ? format(returnDate, 'd-M-yyyy', { locale: vi })
-      : 'NA';
+      ? format(returnDate, 'yyyy-M-dd', { locale: vi })
+      : 'NA'
 
     setDate(`${formattedStartDate}.${formattedReturnDate}`)
   }, [startDate, returnDate])

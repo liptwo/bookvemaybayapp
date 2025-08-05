@@ -64,7 +64,7 @@ const FlightSearchBox = ({ from = '', to = '', setFrom, setTo }) => {
         </Typography>
         <Autocomplete
           disablePortal
-          options={flightOptions.map((option) => option.label)}
+          options={flightOptions}
           value={from}
           onChange={(event, newValue) => setFrom(newValue)} // newValue có thể là null
           renderInput={(params) => (
@@ -141,7 +141,7 @@ const FlightSearchBox = ({ from = '', to = '', setFrom, setTo }) => {
         </Typography>
         <Autocomplete
           disablePortal
-          options={flightOptions.map((option) => option.label)}
+          options={flightOptions}
           value={to}
           onChange={(event, newValue) => setTo(newValue)}
           renderInput={(params) => (

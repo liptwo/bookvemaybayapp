@@ -13,6 +13,7 @@ const AppBarCustom = ({ textColor, justResponeAppBar = false }) => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   })
+
   return (
     <AppBar
       position='fixed'
@@ -48,20 +49,22 @@ const AppBarCustom = ({ textColor, justResponeAppBar = false }) => {
           borderColor: 'gray'
         }}
       />
-      <Container maxWidth='lg'>
-        <Toolbar disableGutters className=' flex flex-col'>
-          {!justResponeAppBar && (
-            <AppBarNoLogo textColor={textColor} scrolled={scrolled} />
-          )}
-        </Toolbar>
-      </Container>
-      <Divider
-        sx={{
-          // borderBottomWidth: '0.5px',
-          opacity: 0.15,
-          borderColor: 'gray'
-        }}
-      />
+      {!justResponeAppBar && (
+        <>
+          <Container maxWidth='lg'>
+            <Toolbar disableGutters className=' flex flex-col'>
+              <AppBarNoLogo textColor={textColor} scrolled={scrolled} />
+            </Toolbar>
+          </Container>
+          <Divider
+            sx={{
+              // borderBottomWidth: '0.5px',
+              opacity: 0.15,
+              borderColor: 'gray'
+            }}
+          />
+        </>
+      )}
     </AppBar>
   )
 }

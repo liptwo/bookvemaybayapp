@@ -19,7 +19,7 @@ import { useConfirm } from 'material-ui-confirm'
 // import LogoutIcon from '@mui/icons-material/Logout'
 import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
-import { updateUserAPI } from '~/redux/user/userSlice'
+import { updateUserAPI } from '~/redux/item/userSlice'
 
 
 function SecurityTab() {
