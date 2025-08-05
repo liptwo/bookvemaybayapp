@@ -59,10 +59,31 @@ export default function Login() {
             color: 'white'
           }}
         >
-          <Box sx={{ display: 'flex', alignItems: 'center', flexDirection:'column', justifyContent: 'center', gap:2, pb: 2 }}>
-          <Typography sx={{ fontWeight: '800', fontSize:'medium', display: 'flex', gap: 1, alignItems: 'center', justifyContent: 'center'}} variant='h6'>
-             Sign In <LogIn color='#333' size={20} />
-          </Typography>
+         <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              gap: 2,
+              pb: 2
+            }}
+          >
+            <Typography
+              sx={{
+                fontWeight: '800',
+                fontSize: 'medium',
+                display: 'flex',
+                gap: 1,
+                alignItems: 'center',
+                color:'black',
+                justifyContent: 'center',
+                fontFamily: 'Montserrat Variable'
+              }}
+              variant='h6'
+            >
+              Sign In <LogIn color='#333' size={20} />
+            </Typography>
             {/* <Typography sx={{ fontWeight: '500', fontSize:'small' }} variant='span'>
               Please Enter Your Account
             </Typography> */}
