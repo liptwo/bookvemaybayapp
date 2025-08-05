@@ -98,10 +98,15 @@ export default function Login() {
                 'Welcome to Book Ticket Plane',
                 1000
               ]}
-              wrapper="span"
+              wrapper='span'
               speed={10}
-              style={{ fontSize: '1rem', display: 'inline-block', fontWeight: '500', color: 'black' }}
-              repeat={Infinity}
+              style={{
+                fontSize: '1rem',
+                display: 'inline-block',
+                fontWeight: '500',
+                color: 'black',
+                fontFamily: 'Montserrat Variable'
+              }}
             />
           </Box>
 
@@ -175,7 +180,7 @@ export default function Login() {
           </Box>
 
 
-          <Button type="submit" fullWidth variant="contained">
+          <Button type='submit' sx={{fontFamily: 'Montserrat Variable'}} fullWidth variant='contained'>
             Sign In
           </Button>
           <Typography sx={{ fontWeight: '300'}} variant="span">
