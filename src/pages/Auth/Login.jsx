@@ -107,6 +107,7 @@ export default function Login() {
                 color: 'black',
                 fontFamily: 'Montserrat Variable'
               }}
+              repeat={Infinity}
             />
           </Box>
 
