@@ -11,8 +11,11 @@ import { Mail } from 'lucide-react'
 import InputAdornment from '@mui/material/InputAdornment'
 // import { Navigate } from 'react-router-dom'
 import Checkbox from '@mui/material/Checkbox'
-import { LogIn } from 'lucide-react';
+import { LogIn } from 'lucide-react'
 import { TypeAnimation } from 'react-type-animation'
+import { useDispatch } from 'react-redux'
+import { loginAPI } from '~/redux/item/userSlice'
+import { toast } from 'react-toastify'
 
 export default function Login() {
   const navigate = useNavigate()
