@@ -31,38 +31,28 @@ const pages = [
   }
 ]
 
-function AppBarNoLogo({ textColor }) {
+function AppBarNoLogo({ textColor, scrolled }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null)
   //   const [anchorElUser, setAnchorElUser] = React.useState(null)
-  const [scrolled, setScrolled] = React.useState(false)
+  // const [scrolled, setScrolled] = React.useState(false)
 
-  React.useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 35) // scroll xuống 50px là đổi màu
-    }
+  // React.useEffect(() => {
+  //   const handleScroll = () => {
+  //     setScrolled(window.scrollY > 35) // scroll xuống 50px là đổi màu
+  //   }
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  })
+  //   window.addEventListener('scroll', handleScroll)
+  //   return () => window.removeEventListener('scroll', handleScroll)
+  // })
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null)
   }
 
   return (
-    <AppBar
-      position=''
-      sx={{
-        xs: { dislay: 'none' },
-        backgroundColor: 'transparent',
-        boxShadow: 'none',
-        backdropFilter: 'none'
-      }}
-    >
-      <Container maxWidth='lg'>
-        <Toolbar disableGutters className='h-10 min-h-'>
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            {/* <IconButton
+    <>
+      <Box sx={{ flexGrow: 1, marginTop: 10, display: { xs: 'flex', md: 'none' } }}>
+        {/* <IconButton
               size='large'
               aria-label='account of current user'
               aria-controls='menu-appbar'
@@ -71,80 +61,91 @@ function AppBarNoLogo({ textColor }) {
               color='inherit'
             >
               {/* <MenuIcon /> */}
-            {/* </IconButton> */}
-            <Menu
-              id='menu-appbar'
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left'
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left'
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{ display: { xs: 'block', md: 'none' } }}
-            >
-              {pages.map((page, i) => (
-                <MenuItem key={i} onClick={handleCloseNavMenu}>
-                  <Typography
-                    sx={{
-                      textAlign: 'center',
-                      display: 'flex',
-                      alignItems: 'center',
-                      fontFamily: 'Inter Variable',
-                      gap: 1,
-                      px: 1,
-                      py: 0.5,
-                      borderRadius: 1,
-                      transition: 'all 0.2s ease',
-                      '&:hover': {
-                        border: `1px solid ${textColor === 'black' ? 'black' : 'white'}`
-                      },
-                      ...(page.title === 'Vé máy bay' && { backgroundColor: textColor === 'black' ? 'black' : 'white', color: textColor === 'black' ? 'white' : 'black' })
-                    }}
-                  >
-                    {page.icon}
-                    {page.title}
-                  </Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: 1 }}>
-            {pages.map((page, i) => (
-              <Button
-                key={i}
-                onClick={handleCloseNavMenu}
+        {/* </IconButton> */}
+        <Menu
+          className='flex items-center justify-center'
+          id='menu-appbar'
+          anchorEl={anchorElNav}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left'
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'left'
+          }}
+          open={Boolean(anchorElNav)}
+          onClose={handleCloseNavMenu}
+          sx={{ display: { xs: 'block', md: 'none' } }}
+        >
+          {pages.map((page, i) => (
+            <MenuItem key={i} onClick={handleCloseNavMenu}>
+              <Typography
                 sx={{
-                  px: 2,
-                  py: 1,
-                  color: scrolled || textColor === 'black' ? 'black' : 'white',
-                  gap: 2,
+                  textAlign: 'center',
                   display: 'flex',
-                  fontWeight: 700,
-                  fontSize: 12,
-                  fontFamily: 'Montserrat Variable',
-                  borderRadius: 12,
-                  border: '1px solid transparent',
+                  alignItems: 'center',
+                  fontFamily: 'Inter Variable',
+                  gap: 1,
+                  px: 1,
+                  py: 0.5,
+                  borderRadius: 1,
+                  transition: 'all 0.2s ease',
                   '&:hover': {
-                    border: `1px solid ${textColor === 'black' ? 'black' : 'white'}`
+                    border: `1px solid ${
+                      textColor === 'black' ? 'black' : 'white'
+                    }`
                   },
-                  ...(page.title === 'Vé máy bay' && { backgroundColor: scrolled || textColor === 'black' ? 'black' : 'white', color: scrolled || textColor === 'black' ? 'white' : 'black' })
+                  ...(page.title === 'Vé máy bay' && {
+                    backgroundColor: textColor === 'black' ? 'black' : 'white',
+                    color: textColor === 'black' ? 'white' : 'black'
+                  })
                 }}
               >
                 {page.icon}
                 {page.title}
-              </Button>
-            ))}
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
+              </Typography>
+            </MenuItem>
+          ))}
+        </Menu>
+      </Box>
+
+      <Box
+        className='flex items-center justify-center'
+        sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: 1 }}
+      >
+        {pages.map((page, i) => (
+          <Button
+            key={i}
+            onClick={handleCloseNavMenu}
+            sx={{
+              px: 2,
+              py: 1,
+              color: scrolled || textColor === 'black' ? 'black' : 'white',
+              gap: 2,
+              display: 'flex',
+              fontWeight: 700,
+              fontSize: 12,
+              fontFamily: 'Montserrat Variable',
+              borderRadius: 12,
+              border: '1px solid transparent',
+              '&:hover': {
+                border: `1px solid ${textColor === 'black' ? 'black' : 'white'}`
+              },
+              ...(page.title === 'Vé máy bay' && {
+                backgroundColor:
+                  scrolled || textColor === 'black' ? 'black' : 'white',
+                color: scrolled || textColor === 'black' ? 'white' : 'black'
+              })
+            }}
+          >
+            {page.icon}
+            {page.title}
+          </Button>
+        ))}
+      </Box>
+    </>
   )
 }
 export default AppBarNoLogo
