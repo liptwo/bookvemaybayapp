@@ -110,7 +110,6 @@ export default function Login() {
               repeat={Infinity}
             />
           </Box>
-
           <TextField
             {...register('email', {
               required: 'Email không được để trống',
