@@ -9,6 +9,7 @@ import './App.css'
 import BookingPage from './pages/BookingPage/BookingPage'
 import Home from './pages/Home/Home'
 import StaffChat from './components/Chat/StaffChat'
+import Settings from './pages/Settings/Settings'
 // Cách 2 xử lý đã đăng nhập
 // * Giải pháp Clean Code trong việc xác định các route nào cần đăng nhập tài khoản xong thì mới cho truy cập
 // * Sử dụng <Outlet /> của react-router-dom để hiển thị các Child Route (xem cách sử dụng trong App() bên
