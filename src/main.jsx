@@ -10,48 +10,48 @@ import { BrowserRouter } from 'react-router-dom'
 //Cấu hình Mui dialog
 import { ConfirmProvider } from 'material-ui-confirm'
 //redux
-// import { store } from '~/redux/store'
-// import { Provider } from 'react-redux'
+import { store } from '~/redux/store'
+import { Provider } from 'react-redux'
 // kỹ thuật injectStore xử dụng redux ngoài component
-// import persistStore from 'redux-persist/es/persistStore'
-// import { PersistGate } from 'redux-persist/integration/react'
-// import { injectStore } from './utils/authorizeAxios'
+import persistStore from 'redux-persist/es/persistStore'
+import { PersistGate } from 'redux-persist/integration/react'
+import { injectStore } from './utils/authorizeAxios'
 import theme from './theme.js'
-// injectStore(store)
-// const persistor = persistStore(store)
+injectStore(store)
+const persistor = persistStore(store)
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter basename='/'>
-    {/* <Provider store={store}>
-      <PersistGate persistor={persistor}> */}
-    <ThemeProvider theme={theme}>
-      <ConfirmProvider
-        defaultOptions={{
-          dialogProps: { maxWidth: 'xs' },
-          confirmationButtonProps: { color: 'error', variant: 'outlined' },
-          cancellationButtonProps: { color: 'inherit' },
-          allowClose: false
-        }}
-      >
-        <GlobalStyles
-          styles={{
-            body: {
-              fontFamily: `'Inter', 'Segoe UI', 'Poppins', sans-serif`
-            },
-            '*': {
-              fontFamily: `'Inter', 'Segoe UI', 'Poppins', sans-serif`
-            },
-            a: { textDecoration: 'none' }
-          }}
-        />
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <ThemeProvider theme={theme}>
+          <ConfirmProvider
+            defaultOptions={{
+              dialogProps: { maxWidth: 'xs' },
+              confirmationButtonProps: { color: 'error', variant: 'outlined' },
+              cancellationButtonProps: { color: 'inherit' },
+              allowClose: false
+            }}
+          >
+            <GlobalStyles
+              styles={{
+                body: {
+                  fontFamily: `'Inter', 'Segoe UI', 'Poppins', sans-serif`
+                },
+                '*': {
+                  fontFamily: `'Inter', 'Segoe UI', 'Poppins', sans-serif`
+                },
+                a: { textDecoration: 'none' }
+              }}
+            />
 
-        <CssBaseline />
-        <App />
-        {/* <SmoothCursor /> */}
-        <ToastContainer position='bottom-right' autoClose={3000} />
-      </ConfirmProvider>
-    </ThemeProvider>
-    {/* </PersistGate>
-    </Provider> */}
+            <CssBaseline />
+            <App />
+            {/* <SmoothCursor /> */}
+            <ToastContainer position='bottom-right' autoClose={3000} />
+          </ConfirmProvider>
+        </ThemeProvider>
+      </PersistGate>
+    </Provider>
   </BrowserRouter>
 )

@@ -11,19 +11,30 @@ import { Mail } from 'lucide-react'
 import InputAdornment from '@mui/material/InputAdornment'
 // import { Navigate } from 'react-router-dom'
 import Checkbox from '@mui/material/Checkbox'
-import { LogIn } from 'lucide-react';
+import { LogIn } from 'lucide-react'
 import { TypeAnimation } from 'react-type-animation'
+import { useDispatch } from 'react-redux'
+import { loginAPI } from '~/redux/item/userSlice'
+import { toast } from 'react-toastify'
 
 export default function Login() {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const {
     register,
     handleSubmit,
     formState: { errors }
   } = useForm()
 
-  const onSubmit = data => {
-    console.log(data)
+  const submitLogin = async ( data ) => {
+    // console.log('🚀 ~ Login.jsx:18 ~ submitLogin ~ data:', data)
+    const { email, password } = data
+    toast.promise(dispatch(loginAPI({ email, password }) ), { pending: 'Logging progress ...' }
+    ).then( res => {
+      // kiểm tra không có lỗi thì mới redirect về route
+      if ( !res.error ) {navigate('/')}
+    }
+    )
   }
 
   return (
@@ -31,16 +42,20 @@ export default function Login() {
       style={{
         minHeight: '100vh',
         width: '100%',
-        backgroundImage: `url('https://static.vinwonders.com/production/ve-may-bay-chu-lai-ha-noi-banner.jpg')`, 
+        backgroundImage: `url('https://static.vinwonders.com/production/ve-may-bay-chu-lai-ha-noi-banner.jpg')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        // fontFamily: 'Montserrat Variable'
       }}
     >
-      <form onSubmit={handleSubmit(onSubmit)} style={{ width: '100%', maxWidth: 450, padding: 20 }}>
+      <form
+        onSubmit={handleSubmit(submitLogin)}
+        style={{ width: '100%', maxWidth: 450, padding: 20 }}
+      >
         <Card
           sx={{
             width: '100%',
@@ -56,10 +71,31 @@ export default function Login() {
             color: 'white'
           }}
         >
-          <Box sx={{ display: 'flex', alignItems: 'center', flexDirection:'column', justifyContent: 'center', gap:2, pb: 2 }}>
-          <Typography sx={{ fontWeight: '800', fontSize:'medium', display: 'flex', gap: 1, alignItems: 'center', justifyContent: 'center'}} variant='h6'>
-             Sign In <LogIn color='#333' size={20} />
-          </Typography>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              gap: 2,
+              pb: 2
+            }}
+          >
+            <Typography
+              sx={{
+                fontWeight: '800',
+                fontSize: 'medium',
+                display: 'flex',
+                gap: 1,
+                alignItems: 'center',
+                color:'black',
+                justifyContent: 'center',
+                fontFamily: 'Montserrat Variable'
+              }}
+              variant='h6'
+            >
+              Sign In <LogIn color='#333' size={20} />
+            </Typography>
             {/* <Typography sx={{ fontWeight: '500', fontSize:'small' }} variant='span'>
               Please Enter Your Account
             </Typography> */}
@@ -74,9 +110,15 @@ export default function Login() {
                 'Welcome to Book Ticket Plane',
                 1000
               ]}
-              wrapper="span"
+              wrapper='span'
               speed={10}
-              style={{ fontSize: '1rem', display: 'inline-block', fontWeight: '500', color: 'black' }}
+              style={{
+                fontSize: '1rem',
+                display: 'inline-block',
+                fontWeight: '500',
+                color: 'black',
+                fontFamily: 'Montserrat Variable'
+              }}
               repeat={Infinity}
             />
           </Box>
@@ -90,13 +132,13 @@ export default function Login() {
               }
             })}
             fullWidth
-            size= 'small'
+            size='small'
             error={Boolean(errors.email)}
             helperText={errors.email?.message}
-            sx={{ pb: 2 }}
-            id="email"
-            label="Email"
-            variant="outlined"
+            sx={{ pb: 2 , fontFamily: 'Montserrat Variable'}}
+            id='email'
+            label='Email'
+            variant='outlined'
           />
 
           <TextField
@@ -107,37 +149,43 @@ export default function Login() {
                 message: 'Mật khẩu phải có ít nhất 6 ký tự'
               }
             })}
-            size= 'small'
+            size='small'
             fullWidth
             error={Boolean(errors.password)}
             helperText={errors.password?.message}
-            sx={{ pb: 2 }}
-            id="password"
-            label="Password"
-            type="password"
-            variant="outlined"
+            sx={{ pb: 2, fontFamily: 'Montserrat Variable' }}
+            id='password'
+            label='Password'
+            type='password'
+            variant='outlined'
           />
-          <Box sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            width: '100%',
-            mb: 2, // margin-bottom
-          }}>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              width: '100%',
+              mb: 2 // margin-bottom
+            }}
+          >
             {/* Remember me */}
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <input type="checkbox" id="remember" />
-              <label htmlFor="remember" style={{ marginLeft: 8, color: '#333' }}>
+              <input type='checkbox' id='remember' />
+              <label
+                htmlFor='remember'
+                style={{ marginLeft: 8, color: '#333', fontFamily: 'Montserrat Variable' }}
+              >
                 Remember me
               </label>
             </Box>
 
             {/* Forget password */}
             <Typography
-              variant="body2"
+              variant='body2'
               sx={{
-                color: 'linear-gradient(to right, #ebebeb 0%, #ebebeb 100%)e',
+                color: 'black',
                 cursor: 'pointer',
+                fontFamily: 'Montserrat Variable',
                 textDecoration: 'underline',
                 '&:hover': { color: '#ccc' }
               }}
@@ -150,15 +198,22 @@ export default function Login() {
             </Typography>
           </Box>
 
-
-          <Button type="submit" fullWidth variant="contained">
+          <Button type='submit' sx={{fontFamily: 'Montserrat Variable'}} fullWidth variant='contained'>
             Sign In
           </Button>
-          <Typography sx={{ fontWeight: '300'}} variant="span">
-              Don't have an account?  {""}
-            <span className='text-blue-800 hover:text-blue-300' onClick={() => {navigate('/register')}}> Sign up</span>
+          <Typography sx={{ fontWeight: '400', fontFamily: 'Montserrat Variable' }} color={'black'} variant='span'>
+            Don't have an account? {''}
+            <span
+              className='text-blue-800 hover:text-blue-300'
+              style={{fontFamily: 'Montserrat Variable'}}
+              onClick={() => {
+                navigate('/register')
+              }}
+            >
+              {' '}
+              Sign up
+            </span>
           </Typography>
-
         </Card>
       </form>
     </div>
