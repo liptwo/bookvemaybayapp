@@ -12,10 +12,10 @@ import { flightOptions } from '~/utils/constants'
 const SearchFlight = () => {
 
   const navigate = useNavigate()
-  const [from, setFrom] = useState(flightOptions[0])
-  const [to, setTo] = useState(flightOptions[1])
+  const [from, setFrom] = useState(flightOptions[1])
+  const [to, setTo] = useState(flightOptions[0])
   const [date, setDate] = useState(Date.now())
-  const [passengers, setPassengers] = useState({ adults: 0, children: 0, infants: 0 })
+  const [passengers, setPassengers] = useState({ adults: 1, children: 0, infants: 0 })
   const [seatClass, setSeatClass] = useState('ECONOMY')
 
   const handleSearch = () => {

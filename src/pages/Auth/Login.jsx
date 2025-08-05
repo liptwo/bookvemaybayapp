@@ -11,6 +11,16 @@ import { Mail } from 'lucide-react'
 import InputAdornment from '@mui/material/InputAdornment'
 // import { Navigate } from 'react-router-dom'
 import Checkbox from '@mui/material/Checkbox'
+<<<<<<<<< Temporary merge branch 1
+import { LogIn } from 'lucide-react'
+import { TypeAnimation } from 'react-type-animation'
+import { useDispatch } from 'react-redux'
+import { loginAPI } from '~/redux/user/userSlice'
+import { toast } from 'react-toastify'
+=========
+import { LogIn } from 'lucide-react';
+import { TypeAnimation } from 'react-type-animation'
+>>>>>>>>> Temporary merge branch 2
 
 export default function Login() {
   const navigate = useNavigate()
@@ -66,11 +76,69 @@ export default function Login() {
             color: 'white'
           }}
         >
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap:2, pb: 2 }}>
-            <Typography sx={{ fontWeight: '700' }} variant="h6">
-              Login
+<<<<<<<<< Temporary merge branch 1
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              gap: 2,
+              pb: 2
+            }}
+          >
+            <Typography
+              sx={{
+                fontWeight: '800',
+                fontSize: 'medium',
+                display: 'flex',
+                gap: 1,
+                alignItems: 'center',
+                color:'black',
+                justifyContent: 'center',
+                fontFamily: 'Montserrat Variable'
+              }}
+              variant='h6'
+            >
+              Sign In <LogIn color='#333' size={20} />
             </Typography>
-            <Plane color='#333' />
+=========
+          <Box sx={{ display: 'flex', alignItems: 'center', flexDirection:'column', justifyContent: 'center', gap:2, pb: 2 }}>
+          <Typography sx={{ fontWeight: '800', fontSize:'medium', display: 'flex', gap: 1, alignItems: 'center', justifyContent: 'center'}} variant='h6'>
+             Sign In <LogIn color='#333' size={20} />
+          </Typography>
+>>>>>>>>> Temporary merge branch 2
+            {/* <Typography sx={{ fontWeight: '500', fontSize:'small' }} variant='span'>
+              Please Enter Your Account
+            </Typography> */}
+            {/* <Plane color='#333' /> */}
+            <TypeAnimation
+              // className="text-3xl font-bold text-gray-800"
+              // Initial text to display
+              sequence={[
+                // Same substring at the start will only be typed out once, initially
+                'Please Enter Your Account',
+                1000, // wait 1s before replacing "Mice" with "Hamsters"
+                'Welcome to Book Ticket Plane',
+                1000
+              ]}
+<<<<<<<<< Temporary merge branch 1
+              wrapper='span'
+              speed={10}
+              style={{
+                fontSize: '1rem',
+                display: 'inline-block',
+                fontWeight: '500',
+                color: 'black',
+                fontFamily: 'Montserrat Variable'
+              }}
+=========
+              wrapper="span"
+              speed={10}
+              style={{ fontSize: '1rem', display: 'inline-block', fontWeight: '500', color: 'black' }}
+>>>>>>>>> Temporary merge branch 2
+              repeat={Infinity}
+            />
           </Box>
 
           <TextField
@@ -148,9 +216,13 @@ export default function Login() {
             </Typography>
           </Box>
 
+<<<<<<<<< Temporary merge branch 1
+          <Button type='submit' sx={{fontFamily: 'Montserrat Variable'}} fullWidth variant='contained'>
+=========
 
           <Button type="submit" fullWidth variant="contained">
-            Login
+>>>>>>>>> Temporary merge branch 2
+            Sign In
           </Button>
           <Typography sx={{ fontWeight: '400', fontFamily: 'Montserrat Variable' }} color={'black'} variant='span'>
             Don't have an account? {''}

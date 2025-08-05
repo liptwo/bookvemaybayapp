@@ -1,3 +1,6 @@
+import { intervalToDuration } from 'date-fns'
+
+
 export const capitalizeFirstLetter = (val) => {
   if (!val) return ''
   return `${val.charAt(0).toUpperCase()}${val.slice(1)}`
@@ -24,3 +27,25 @@ export const interceptorLoadingElements = (calling) => {
     }
   }
 }
+
+
+export const formatDuration = (totalMinutes) => {
+  // Dùng intervalToDuration để chuyển số phút thành đối tượng { hours, minutes }
+  const duration = intervalToDuration({ start: 0, end: totalMinutes * 60 * 1000 })
+
+  let result = ''
+
+  if (duration.hours > 0) {
+    result += `${duration.hours}h`
+  }
+
+  if (duration.minutes > 0) {
+    if (result !== '') {
+      result += ' '
+    }
+    result += `${duration.minutes}m`
+  }
+
+  return result || '0m'
+}
+

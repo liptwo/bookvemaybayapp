@@ -37,7 +37,7 @@ const GuestSelector = ( { passengers, setPassengers }) => {
       // Cập nhật state cục bộ trước
       // Sau đó cập nhật prop setPassengers với giá trị MỚI của tất cả các loại hành khách
       // Dựa vào giá trị state hiện tại và giá trị mới của loại hành khách đang thay đổi
-      if (setter === setAdults) {
+      if (setter === setAdults && adults >= 1) {
         setPassengers({ adults: newCount, children, infants })
       } else if (setter === setChildren) {
         setPassengers({ adults, children: newCount, infants })

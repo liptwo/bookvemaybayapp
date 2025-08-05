@@ -3,11 +3,12 @@ import NotFound from '~/pages/404/NotFound'
 import Auth from '~/pages/Auth/Auth'
 // import AccountVerification from './pages/Auth/AccountVerification'
 import { useSelector } from 'react-redux'
-import { selectCurrentUser } from '~/redux/user/userSlice'
+import { selectCurrentUser } from '~/redux/item/userSlice'
 // import Settings from '~/pages/Settings/Settings'
 import './App.css'
 import BookingPage from './pages/BookingPage/BookingPage'
 import Home from './pages/Home/Home'
+import StaffChat from './components/Chat/StaffChat'
 import Settings from './pages/Settings/Settings'
 // Cách 2 xử lý đã đăng nhập
 // * Giải pháp Clean Code trong việc xác định các route nào cần đăng nhập tài khoản xong thì mới cho truy cập
@@ -38,15 +39,15 @@ function App() {
       } />
       {/* /* Protected Routes (Hiểu đơn giản trong dự án của chúng ta là những route chỉ cho truy cập sau khi
     dã login) */ }
-      <Route element={<ProtectedRoute user={currentUser} />}>
-        {/* // <Outlet/> của react router dom sẽ chạy vào các child route trong này */}
+      {/* <Route element={<ProtectedRoute user={currentUser} />}> */}
+      {/* // <Outlet/> của react router dom sẽ chạy vào các child route trong này */}
 
         {/*  board detail */}
         <Route path='/flight' element={<BookingPage />} />
         {/* // Profile userr */}
         <Route path='/settings/account' element={<Settings/>} />
         <Route path='/settings/security' element={<Settings/>} />
-      </Route>
+      {/* </Route> */}
 
       <Route path='/login' element={<Auth />} />
       <Route path='/register' element={<Auth />} />
