@@ -1,11 +1,73 @@
 import * as React from 'react'
-import { ChevronLeft, AlignJustify, Image, Link, Smile } from 'lucide-react'
+import { useState } from 'react'
+import { ChevronLeft, AlignJustify, Image, Link, Smile, Send } from 'lucide-react'
+import { useChat } from '~/hooks/useChat'
+import { Avatar } from '@mui/material'
 
 const UserChat = () => {
+    const [messageInput, setMessageInput] = useState('')
+    const [showChat, setShowChat] = useState(false)
+    const [clientInfo, setClientInfo] = useState({
+        name: '',
+        email: ''
+    })
+    const [showStartForm, setShowStartForm] = useState(true)
+
+    // Khởi tạo chat hook cho client
+    const {
+        currentConversation,
+        messages,
+        loading,
+        error,
+        startConversation,
+        sendMessage
+    } = useChat('client')
+
+    // Xử lý bắt đầu cuộc trò chuyện
+    const handleStartConversation = async (e) => {
+        e.preventDefault()
+        if (!clientInfo.name.trim() || !clientInfo.email.trim()) return
+
+        try {
+            await startConversation(clientInfo)
+            setShowStartForm(false)
+            setShowChat(true)
+        } catch (error) {
+            console.error('Error starting conversation:', error)
+        }
+    }
+
+    // Xử lý gửi tin nhắn
+    const handleSendMessage = () => {
+        if (!messageInput.trim() || !currentConversation) return
+        
+        sendMessage(messageInput.trim())
+        setMessageInput('')
+    }
+
+    // Xử lý key press trong input
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault()
+            handleSendMessage()
+        }
+    }
+
+    // Format thời gian
+    const formatTime = (dateString) => {
+        return new Date(dateString).toLocaleTimeString('vi-VN', {
+            hour: '2-digit',
+            minute: '2-digit'
+        })
+    }
+
     return (
-        <div className='w-75 h-100 bg-white shadow-xl '>
+        <div className='w-75 h-100 bg-white shadow-xl'>
             <div className='bg-[#1e567b] text-white flex items-center justify-between p-2 h-10'>
-                <div className='hover:cursor-pointer hover:bg-[#878686] rounded-full'>
+                <div 
+                    className='hover:cursor-pointer hover:bg-[#878686] rounded-full p-1'
+                    onClick={() => setShowChat(false)}
+                >
                     <ChevronLeft></ChevronLeft>
                 </div>
                 <div className=''>
@@ -15,25 +77,136 @@ const UserChat = () => {
                     <AlignJustify size={18}></AlignJustify>
                 </div>
             </div>
-            <div className='h-80'>
 
-            </div>
-            <div className='flex p-2 gap-x-1 border-t border-t-[#ccc]'>
-                <div className='grow-1 '>
-                    <input type="text" placeholder='Nhập phản hồi' className='w-full outline-none' />
+            {!showChat ? (
+                // Form bắt đầu cuộc trò chuyện
+                <div className='p-4'>
+                    {showStartForm ? (
+                        <form onSubmit={handleStartConversation} className='space-y-4'>
+                            <div>
+                                <label className='block text-sm font-medium text-gray-700 mb-1'>
+                                    Họ tên
+                                </label>
+                                <input
+                                    type='text'
+                                    value={clientInfo.name}
+                                    onChange={(e) => setClientInfo(prev => ({ ...prev, name: e.target.value }))}
+                                    className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
+                                    placeholder='Nhập họ tên của bạn'
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label className='block text-sm font-medium text-gray-700 mb-1'>
+                                    Email
+                                </label>
+                                <input
+                                    type='email'
+                                    value={clientInfo.email}
+                                    onChange={(e) => setClientInfo(prev => ({ ...prev, email: e.target.value }))}
+                                    className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
+                                    placeholder='Nhập email của bạn'
+                                    required
+                                />
+                            </div>
+                            <button
+                                type='submit'
+                                disabled={loading}
+                                className='w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 disabled:opacity-50'
+                            >
+                                {loading ? 'Đang kết nối...' : 'Bắt đầu chat'}
+                            </button>
+                        </form>
+                    ) : (
+                        <div className='text-center py-8'>
+                            <div className='text-green-600 mb-2'>✓ Đã kết nối thành công!</div>
+                            <button
+                                onClick={() => setShowChat(true)}
+                                className='bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700'
+                            >
+                                Vào chat
+                            </button>
+                        </div>
+                    )}
                 </div>
-                <div className='flex items-center gap-x-1'>
-                    <div>
-                        <Image size={20}></Image>
+            ) : (
+                // Chat interface
+                <>
+                    <div className='h-80 bg-gray-50 p-3 overflow-y-auto'>
+                        {messages.length === 0 ? (
+                            <div className='text-center text-gray-500 py-8'>
+                                Chào mừng! Hãy bắt đầu cuộc trò chuyện.
+                            </div>
+                        ) : (
+                            messages.map((message) => (
+                                <div key={message._id} className={`flex items-start gap-2 mb-3 ${
+                                    message.senderRole === 'client' ? 'justify-end' : 'justify-start'
+                                }`}>
+                                    {message.senderRole !== 'client' && (
+                                        <Avatar 
+                                            alt="Admin" 
+                                            src="/static/images/avatar/1.jpg"
+                                            sx={{ width: 32, height: 32 }}
+                                        />
+                                    )}
+                                    <div className={`max-w-[70%] px-3 py-2 rounded-lg ${
+                                        message.senderRole === 'client' 
+                                            ? 'bg-blue-600 text-white' 
+                                            : 'bg-white border border-gray-200'
+                                    }`}>
+                                        <div className='text-sm'>{message.content}</div>
+                                        <div className={`text-xs mt-1 ${
+                                            message.senderRole === 'client' 
+                                                ? 'text-blue-100' 
+                                                : 'text-gray-500'
+                                        }`}>
+                                            {formatTime(message.createdAt)}
+                                        </div>
+                                    </div>
+                                </div>
+                            ))
+                        )}
                     </div>
-                    <div>
-                        <Link size={20}></Link>
+                    
+                    <div className='flex p-2 gap-x-1 border-t border-t-[#ccc]'>
+                        <div className='grow-1 flex items-center gap-x-2'>
+                            <input 
+                                type="text" 
+                                placeholder='Nhập phản hồi' 
+                                className='flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
+                                value={messageInput}
+                                onChange={(e) => setMessageInput(e.target.value)}
+                                onKeyPress={handleKeyPress}
+                            />
+                            <button
+                                onClick={handleSendMessage}
+                                disabled={!messageInput.trim()}
+                                className='bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 disabled:opacity-50'
+                            >
+                                <Send size={16} />
+                            </button>
+                        </div>
+                        <div className='flex items-center gap-x-1'>
+                            <div className='hover:cursor-pointer hover:bg-gray-100 p-1 rounded'>
+                                <Image size={20}></Image>
+                            </div>
+                            <div className='hover:cursor-pointer hover:bg-gray-100 p-1 rounded'>
+                                <Link size={20}></Link>
+                            </div>
+                            <div className='hover:cursor-pointer hover:bg-gray-100 p-1 rounded'>
+                                <Smile size={20}></Smile>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <Smile size={20}></Smile>
-                    </div>
+                </>
+            )}
+
+            {/* Error Display */}
+            {error && (
+                <div className='fixed top-4 right-4 bg-red-500 text-white p-3 rounded-lg shadow-lg z-50'>
+                    {error}
                 </div>
-            </div>
+            )}
         </div>
     )
 }

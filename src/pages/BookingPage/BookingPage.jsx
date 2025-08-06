@@ -16,7 +16,7 @@ import { fetchFlightsAPI } from '~/redux/item/useFlight'
 import { PlaneTakeoff } from 'lucide-react'
 import { Binoculars } from 'lucide-react'
 import { ChevronUp } from 'lucide-react'
-import { flightOptions } from '~/utils/constants'
+// import { flightOptions } from '~/utils/constants'
 function BookingPage() {
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } }
   const [params] = useSearchParams()

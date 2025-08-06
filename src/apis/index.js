@@ -25,11 +25,11 @@ export const registerAPI = async ( userInfo ) => {
   return request.data
 }
 
-export const verifyUserApi = async ( data ) => {
-  const request = await authorizedAxiosInstance.put(`${API_ROOT}/v1/users/verify`, data)
-  toast.success('Account verified successfully! Now you can login to enjoy to our services!', { theme: 'colored' })
-  return request.data
-}
+// export const verifyUserApi = async ( data ) => {
+//   const request = await authorizedAxiosInstance.put(`${API_ROOT}/v1/users/verify`, data)
+//   toast.success('Account verified successfully! Now you can login to enjoy to our services!', { theme: 'colored' })
+//   return request.data
+// }
 
 export const refreshTokenAPI = async ( ) => {
   const request = await authorizedAxiosInstance.get(`${API_ROOT}/v1/users/refresh_token`)

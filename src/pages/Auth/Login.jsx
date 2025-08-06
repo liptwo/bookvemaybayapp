@@ -32,7 +32,8 @@ export default function Login() {
     toast.promise(dispatch(loginAPI({ email, password }) ), { pending: 'Logging progress ...' }
     ).then( res => {
       // kiểm tra không có lỗi thì mới redirect về route
-      if ( !res.error ) {navigate('/')}
+      if (res.payload.role === 'admin') { navigate('/staffchat') }
+      else if ( !res.error ) {navigate('/')}
     }
     )
   }

@@ -3,7 +3,7 @@ import React from 'react'
 // import AppBarNoLogo from '~/components/ResponsiveAppBar/AppBarNoLogo' // Chưa sử dụng, có thể xóa
 import VHL from '~/asset/img/travellokaBg.webp'
 // import Trusted from '../../asset/img/trusted.png' // Chưa sử dụng, có thể xóa
-import { Box, Button, Typography } from '@mui/material' // Thêm Typography
+import { Badge, Box, Button, Typography } from '@mui/material' // Thêm Typography
 import Container from '@mui/material/Container'
 import {
   Gift,
@@ -31,12 +31,15 @@ import r3 from '../../asset/img/r3.png'
 import SearchFlight from './SearchFlight'
 import UserChat from '~/components/Chat/UserChat'
 import AppBarCustom from '~/components/ResponsiveAppBar/AppBarCustom'
+import { MessageSquareMore } from 'lucide-react'
 
 const Home = () => {
-  const [showChat, setShowChat] = React.useState(false)
-  const toggleChat = () => {
-    setShowChat((prev) => !prev)
-  }
+
+  // const [showChat, setShowChat] = React.useState(false)
+
+  // const toggleChat = () => {
+  //   setShowChat((prev) => !prev)
+  // }
   return (
     <div className=' min-h-screen pb-10 font-sans'>
       {/* Banner và Thanh điều hướng */}
@@ -378,7 +381,7 @@ const Home = () => {
         </div>
       </Container>
 
-      <div className='fixed z-20 bottom-7 right-7   w-14 text-black shadow-lg rounded-full bg-[#d8dadc] flex items-center justify-center'>
+      {/* <div className='fixed z-20 bottom-7 right-7   w-14 text-black shadow-lg rounded-full bg-[#d8dadc] flex items-center justify-center'>
         <div
           onClick={toggleChat}
           className='hover:cursor-pointer hover:brightness-90 p-3'
@@ -390,7 +393,7 @@ const Home = () => {
         <div className='absolute -top-100 right-5'>
           {showChat && <UserChat></UserChat>}
         </div>
-      </div>
+      </div> */}
 
       {/* Footer */}
       <Container>
