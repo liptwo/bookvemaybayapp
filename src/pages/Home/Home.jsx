@@ -13,7 +13,9 @@ import {
   Navigation,
   Copy,
   // Search,
-  BadgeQuestionMark
+  BadgeQuestionMark,
+  Badge,
+  MessageSquareMore
 } from 'lucide-react'
 import km1 from '../../asset/img/km1.png'
 import km2 from '../../asset/img/km2.png'
@@ -384,7 +386,7 @@ const Home = () => {
           className='hover:cursor-pointer hover:brightness-90 p-3'
         >
           <Badge badgeContent={4} color='primary'>
-            <MessageSquareMore size={30}></MessageSquareMore>
+            <MessageSquareMore   size={30}></MessageSquareMore>
           </Badge>
         </div>
         <div className='absolute -top-100 right-5'>
