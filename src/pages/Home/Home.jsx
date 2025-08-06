@@ -32,9 +32,13 @@ import SearchFlight from './SearchFlight'
 import UserChat from '~/components/Chat/UserChat'
 import AppBarCustom from '~/components/ResponsiveAppBar/AppBarCustom'
 import { MessageSquareMore } from 'lucide-react'
+import { useSelector } from 'react-redux'
+import { selectCurrentUser } from '~/redux/item/userSlice'
+import ChatWidget from '~/components/Chat/ChatWidget'
+import ChatButton from '~/components/Chat/ChatButton'
 
 const Home = () => {
-
+  const currentUser = useSelector(selectCurrentUser)
   // const [showChat, setShowChat] = React.useState(false)
 
   // const toggleChat = () => {
@@ -403,6 +407,9 @@ const Home = () => {
           Nhóm 3
         </div>
       </Container>
+      {/* Chat Components */}
+      <ChatWidget />
+      <ChatButton type={currentUser?.role === 'admin' ? 'staff' : 'user'} />
     </div>
   )
 }

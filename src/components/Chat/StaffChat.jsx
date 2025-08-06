@@ -1,4 +1,4 @@
-import { Avatar } from '@mui/material'
+import { Avatar, Grid } from '@mui/material'
 import {
   Ellipsis,
   MessageCircle,
@@ -69,7 +69,13 @@ const StaffChat = () => {
     sendMessage(messageInput.trim())
     setMessageInput('')
   }
-
+  // const updateStatus = async (id) => {
+  //   try {
+  //     await loadConversationHistory(id)
+  //   } catch (error) {
+  //     console.error('Error loading conversation:', error)
+  //   }
+  // }
   // Xử lý chọn cuộc trò chuyện
   const handleSelectConversation = async (conversation) => {
     try {
@@ -100,26 +106,26 @@ const StaffChat = () => {
   }
 
   return (
-    <div className='bg-white grid grid-cols-[4%_20%_76%] text-black h-[100vh]'>
-      <div className='bg-blue-600 flex flex-col justify-between items-center py-4'>
+    <div className='bg-white flex flex-row text-black h-screen'>
+      <div item size={1} className='bg-blue-600 px-2 flex flex-col justify-between items-center py-4'>
         <div className='flex flex-col items-center gap-y-4'>
-          <div className='hover:cursor-pointer hover:brightness-95'>
+          <div className='cursor-pointer  hover:brightness-95'>
             <Avatar src={user?.avatar || '/broken-image.jpg'} />
           </div>
-          <div className='hover:cursor-pointer hover:bg-[#737070] p-1 rounded-full'>
+          {/* <div className='cursor-pointer hover:bg-[#e7baba] p-1 rounded-full'>
             <MessageCircle size={30}></MessageCircle>
-          </div>
+          </div> */}
         </div>
-        <div className='hover:cursor-pointer hover:bg-[#737070] p-1 rounded-full'>
+        <div className='hover:cursor-pointer hover:bg-[#ecafaf] p-1 rounded-full'>
           <Settings size={30}></Settings>
         </div>
       </div>
 
-      <div className='border-r border-r-[#ccc]'>
-        <div className='flex items-center justify-between border-b border-b-[#ccc] pb-1'>
-          <div className='flex items-center gap-x-1.5 text-sm font-medium'>
+      <div size={3} className='border-r w-[250px] border-r-[#ccc]'>
+        <div className='flex items-center px-2 justify-between border-b border-b-[#ccc]'>
+          <div className='flex  items-center gap-3 text-sm font-medium'>
             <div
-              className={`hover:underline hover:cursor-pointer ${
+              className={`hover:bg-amber-400 p-2 rounded-2xl cursor-pointer ${
                 filter === 'all' ? 'text-blue-600' : ''
               }`}
               onClick={() => setFilter('all')}
@@ -127,7 +133,7 @@ const StaffChat = () => {
               Tất cả
             </div>
             <div
-              className={`hover:underline hover:cursor-pointer ${
+              className={`hover:bg-amber-400 p-2 rounded-2xl  cursor-pointer ${
                 filter === 'unread' ? 'text-blue-600' : ''
               }`}
               onClick={() => setFilter('unread')}
@@ -140,7 +146,7 @@ const StaffChat = () => {
           </div>
         </div>
 
-        <div className='pt-1.5 gap-y-1 max-h-[calc(100vh-60px)] overflow-y-auto'>
+        <div className='flex flex-col overflow-auto'>
           {loading ? (
             <div className='p-4 text-center text-gray-500'>Đang tải...</div>
           ) : filteredConversations.length === 0 ? (
@@ -169,13 +175,13 @@ const StaffChat = () => {
                     <div className='font-medium'>
                       {conversation.clientInfo?.name}
                     </div>
-                    <div className='text-sm text-gray-600'>
+                    {/* <div className='text-sm text-gray-600'>
                       {conversation.status === 'pending'
                         ? 'Đang chờ'
                         : conversation.status === 'active'
-                        ? 'Đang hoạt động'
-                        : 'Đã đóng'}
-                    </div>
+                          ? 'Đang hoạt động'
+                          : 'Đã đóng'}
+                    </div> */}
                   </div>
                   <div className='text-sm text-gray-500'>
                     {formatTime(conversation.createdAt)}
@@ -187,7 +193,7 @@ const StaffChat = () => {
         </div>
       </div>
 
-      <div className=''>
+      <div className=' w-full h-full'>
         {currentConversation ? (
           <>
             <div className='flex w-full p-2 gap-x-1 items-center justify-between border-b border-b-[#ccc] pb-2'>
@@ -199,13 +205,13 @@ const StaffChat = () => {
                 <div className='font-medium'>
                   {currentConversation.clientInfo?.name}
                 </div>
-                <div className='text-sm text-gray-500'>
+                {/* <div className='text-sm text-gray-500'>
                   {currentConversation.status === 'pending'
                     ? 'Đang chờ'
                     : currentConversation.status === 'active'
-                    ? 'Đang hoạt động'
-                    : 'Đã đóng'}
-                </div>
+                      ? 'Đang hoạt động'
+                      : 'Đã đóng'}
+                </div> */}
               </div>
               <div className='flex gap-x-1'>
                 <button
@@ -227,7 +233,7 @@ const StaffChat = () => {
 
             <div>
               {/* Chat Messages */}
-              <div className='bg-[#ebecf0] h-[82vh] p-2 overflow-y-auto'>
+              <div className='bg-[#ebecf0]  h-[450px] overflow-y-auto p-2 overflow-y-auto'>
                 {messages.map((message) => (
                   <div
                     key={message._id}
@@ -239,12 +245,14 @@ const StaffChat = () => {
                       <Avatar alt='Client' src='/static/images/avatar/1.jpg' />
                     )}
                     <div
-                      className={`shadow-lg bg-white rounded px-3 py-2 inline-block max-w-[70%] ${
-                        message.senderRole === 'admin' ? 'bg-blue-100' : ''
-                      }`}
+                      className={`shadow-lg ${
+                        message.senderRole === 'admin' ? 'bg-blue-500 text-white' : 'bg-white'
+                      }  rounded px-3 py-2 inline-block max-w-[70%] `}
                     >
                       <div>{message.content}</div>
-                      <div className='text-[10px] text-gray-500'>
+                      <div className={`text-[10px]  ${
+                        message.senderRole === 'admin' ? 'text-gray-200' : 'text-gray-500'
+                      }`}>
                         {new Date(message.createdAt).toLocaleTimeString(
                           'vi-VN',
                           {
@@ -271,7 +279,7 @@ const StaffChat = () => {
                     <Ellipsis></Ellipsis>
                   </div>
                 </div>
-                <div className='flex items-center gap-x-2 p-2'>
+                <div className='flex items-center gap-x-2 py-3 px-2'>
                   <input
                     type='text'
                     placeholder='Nhập tin nhắn'
