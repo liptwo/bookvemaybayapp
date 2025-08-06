@@ -8,17 +8,14 @@ export const socketIoInstance = io(API_ROOT)
 
 // Socket riêng cho chat
 export const createChatSocket = (authData = null) => {
-  const options = {
-    path: '/socket.io/',
-    transports: ['websocket', 'polling']
-  }
+  const options = {}
 
   // Nếu có auth data (cho admin), thêm vào
   if (authData) {
     options.auth = authData
   }
 
-  return io(`${API_ROOT}/chat`, options)
+  return io(`${API_ROOT}`, options)
 }
 
 // Socket cho client chat (không cần auth)

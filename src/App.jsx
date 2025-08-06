@@ -23,13 +23,20 @@ import ChatButton from './components/Chat/ChatButton'
 // * Một bài hướng dẫn khá đầy đủ:
 // https://www.robinwieruch.de/react-router-private-routes/
 const ProtectedRoute = ({ user }) => {
-  if( user?.role === 'admin') {
-    return <Navigate to='/chatstaff' replace={true} />
+  if (user?.role === 'admin') {
+    return <Navigate to='/staffchat' replace={true} />
   }
-  if ( !user ) {
+  if (!user) {
     return <Navigate to='/login' replace={true} />
   }
   return <Outlet />
+}
+
+const ChatRouteAdmin = ({ user }) => {
+  if (user?.role === 'admin') {
+    return <Outlet />
+  }
+  return <Navigate to='/' replace={true} />
 }
 
 function App() {
@@ -39,38 +46,37 @@ function App() {
     <ChatProvider>
       <Routes>
         // redireact route
-        <Route path='/' element={
-          // Ở đây cần replace giá trị true để nó thay thế route /, có thể hiểu là route / sẽ không còn nằm
-          // trong history của Browser
-          // Thực hành dễ hiểu hơn bằng cách nhân Go Home từ trang 404 xong thử quay lại bằng nút back của trình
-          // duyệt giữa 2 trường hợp có replace hoặc không có.
-          <Home/>
-        } />
+        <Route
+          path='/'
+          element={
+            // Ở đây cần replace giá trị true để nó thay thế route /, có thể hiểu là route / sẽ không còn nằm
+            // trong history của Browser
+            // Thực hành dễ hiểu hơn bằng cách nhân Go Home từ trang 404 xong thử quay lại bằng nút back của trình
+            // duyệt giữa 2 trường hợp có replace hoặc không có.
+            <Home />
+          }
+        />
         {/* /* Protected Routes (Hiểu đơn giản trong dự án của chúng ta là những route chỉ cho truy cập sau khi
-      dã login) */ }
-        {/* <Route element={<ProtectedRoute user={currentUser} />}> */}
-        {/* // <Outlet/> của react router dom sẽ chạy vào các child route trong này */}
+      dã login) */}
+        <Route element={<ProtectedRoute user={currentUser} />}>
+          {/* // <Outlet/> của react router dom sẽ chạy vào các child route trong này */}
           {/*  board detail */}
           <Route path='/flight' element={<BookingPage />} />
           {/* // Profile userr */}
-          <Route path='/settings/account' element={<Settings/>} />
-          <Route path='/settings/security' element={<Settings/>} />
-          <Route path='/flight/seat/:id' element={<BookingSeat/>} />
-
-        {/* </Route> */}
-
+          <Route path='/settings/account' element={<Settings />} />
+          <Route path='/settings/security' element={<Settings />} />
+          <Route path='/flight/seat/:id' element={<BookingSeat />} />
+        </Route>
+        <Route element={<ChatRouteAdmin user={currentUser} />}>
+          <Route path='/staffchat' element={<StaffChat />} />
+        </Route>
         <Route path='/login' element={<Auth />} />
         <Route path='/register' element={<Auth />} />
-        <Route path='/staffchat' element={<StaffChat />}></Route>
-
         {/* <Route path='/account/verification' element={<AccountVerification />}/> */}
         // 404 not found page
         <Route path='*' element={<NotFound />} />
       </Routes>
 
-      {/* Chat Components */}
-      <ChatWidget />
-      <ChatButton type={currentUser?.role === 'admin' ? 'staff' : 'user'} />
     </ChatProvider>
   )
 }

@@ -16,7 +16,8 @@ export const useChat = (userRole = 'client', userId = null) => {
 
   // Tạo socket
   useEffect(() => {
-    const authData = userRole === 'admin' && userId ? { userId, userRole: 'admin' } : null
+    const authData =
+      userRole === 'admin' && userId ? { userId, userRole: 'admin' } : null
     const chatSocket = createChatSocket(authData)
     setSocket(chatSocket)
 
@@ -29,75 +30,81 @@ export const useChat = (userRole = 'client', userId = null) => {
 
     // Tin nhắn mới
     socket.on('new-message', (message) => {
-      setMessages(prev => [...prev, message])
+      setMessages((prev) => [...prev, message])
     })
 
     // Cuộc trò chuyện mới (admin)
-    if (userRole === 'admin') {
-      socket.on('new-conversation', (conversation) => {
-        console.log('🔔 Admin received new conversation:', conversation)
-        setConversations(prev => [conversation, ...prev])
-      })
-    }
-
-    // Error events
-    socket.on('error', (error) => {
-      setError(error.message)
+    socket.on('new-conversation', (conversation) => {
+      console.log('🔔 Admin received new conversation:', conversation)
+      setConversations((prev) => [conversation, ...prev])
     })
+
+    // // Error events
+    // socket.on('error', (error) => {
+    //   setError(error.message)
+    // })
 
     return () => {
       socket.off('new-message')
       socket.off('new-conversation')
-      socket.off('error')
+      // socket.off('error')
     }
   }, [socket, userRole])
 
   // Bắt đầu cuộc trò chuyện (client)
-  const startConversation = useCallback(async (clientData) => {
-    try {
-      setLoading(true)
-      const conversation = await startConversationAPI(clientData)
-      setCurrentConversation(conversation)
-      
-      if (socket) {
-        socket.emit('join-conversation', { conversationId: conversation._id })
+  const startConversation = useCallback(
+    async (clientData) => {
+      try {
+        setLoading(true)
+        const conversation = await startConversationAPI(clientData)
+        setCurrentConversation(conversation)
+
+        if (socket) {
+          socket.emit('join-conversation', { conversationId: conversation._id })
+        }
+
+        return conversation
+      } catch (error) {
+        setError(error.message)
+        throw error
+      } finally {
+        setLoading(false)
       }
-      
-      return conversation
-    } catch (error) {
-      setError(error.message)
-      throw error
-    } finally {
-      setLoading(false)
-    }
-  }, [socket])
+    },
+    [socket]
+  )
 
   // Lấy lịch sử tin nhắn
-  const loadConversationHistory = useCallback(async (conversationId) => {
-    try {
-      setLoading(true)
-      const { conversation, messages } = await getConversationHistoryAPI(conversationId)
-      
-      setCurrentConversation(conversation)
-      setMessages(messages)
-      
-      if (socket) {
-        socket.emit('join-conversation', { conversationId })
+  const loadConversationHistory = useCallback(
+    async (conversationId) => {
+      try {
+        setLoading(true)
+        const { conversation, messages } = await getConversationHistoryAPI(
+          conversationId
+        )
+
+        setCurrentConversation(conversation)
+        setMessages(messages)
+
+        if (socket) {
+          socket.emit('join-conversation', { conversationId })
+        }
+
+        return { conversation, messages }
+      } catch (error) {
+        setError(error.message)
+        throw error
+      } finally {
+        setLoading(false)
       }
-      
-      return { conversation, messages }
-    } catch (error) {
-      setError(error.message)
-      throw error
-    } finally {
-      setLoading(false)
-    }
-  }, [socket])
+    },
+    [socket]
+  )
 
   // Lấy danh sách cuộc trò chuyện (admin)
   const loadOpenConversations = useCallback(async () => {
     if (userRole !== 'admin') return
-    
+
     try {
       setLoading(true)
       const conversations = await getOpenConversationsAPI()
@@ -112,14 +119,17 @@ export const useChat = (userRole = 'client', userId = null) => {
   }, [userRole])
 
   // Gửi tin nhắn
-  const sendMessage = useCallback((content) => {
-    if (!socket || !currentConversation) return
-    
-    socket.emit('send-message', {
-      conversationId: currentConversation._id,
-      content
-    })
-  }, [socket, currentConversation])
+  const sendMessage = useCallback(
+    (content) => {
+      if (!socket || !currentConversation) return
+
+      socket.emit('send-message', {
+        conversationId: currentConversation._id,
+        content
+      })
+    },
+    [socket, currentConversation]
+  )
 
   return {
     conversations,

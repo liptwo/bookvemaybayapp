@@ -4,6 +4,13 @@ import { createTheme } from '@mui/material/styles';
 // import { blue, deepOrange, orange, teal } from '@mui/material/colors'
 
 const theme = createTheme({
+  palette: {
+    mode: 'light', // 👈 chế độ mặc định
+    text: {
+      primary: '#172b4d'
+    }
+  },
+  defaultColorScheme: 'light',
   colorSchemes: {
     light: {
       palette: {
