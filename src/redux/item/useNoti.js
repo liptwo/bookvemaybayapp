@@ -3,27 +3,28 @@ import authorizedAxiosInstance from '~/utils/authorizeAxios'
 
 import { API_ROOT } from '~/utils/constants'
 
-export const fecthBookingSeatAPI = createAsyncThunk(
-  'notifications/fecthBookingSeatAPI',
-  async () => {
+export const fecthNotiAPI = createAsyncThunk(
+  'noti/fecthNotiAPI',
+  async (userId) => {
     const respone = await authorizedAxiosInstance.get(
-      `${API_ROOT}/v1/bookings/my-bookings`
+      `${API_ROOT}/v1/noti?userId=${userId}`
     )
+    // console('respone', respone)
     // axios trả về qua data
-    return respone.data
+    return respone
   }
 )
 
-export const updateBookingSeatAPI = createAsyncThunk(
-  'notifications/updateBoardInvitationAPI',
-  async ({ bookingId, seat }) => {
-    const respone = await authorizedAxiosInstance.put(
-      `${API_ROOT}/v1/bookings/${bookingId}`,
-      { seat }
-    )
-    return respone.data
-  }
-)
+// export const updateBookingSeatAPI = createAsyncThunk(
+//   'notifications/updateBoardInvitationAPI',
+//   async ({ bookingId, seat }) => {
+//     const respone = await authorizedAxiosInstance.put(
+//       `${API_ROOT}/v1/bookings/${bookingId}`,
+//       { seat }
+//     )
+//     return respone.data
+//   }
+// )
 
 export const activeNotiSlice = createSlice({
   name: 'noti',
@@ -44,21 +45,20 @@ export const activeNotiSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
-    builder.addCase(fecthBookingSeatAPI.fulfilled, (state, action) => {
+    builder.addCase(fecthNotiAPI.fulfilled, (state, action) => {
       const incommingNoti= action.payload
-      state.currentNoti = Array.isArray(incommingNoti)
-        ? incommingNoti.reverse()
-        : []
+      // console.log('incommingNoti', incommingNoti)
+      state.currentNoti = incommingNoti.data
     })
 
-    builder.addCase(updateBookingSeatAPI.fulfilled, (state, action) => {
-      const incommingNoti = action.payload
+    // builder.addCase(updateBookingSeatAPI.fulfilled, (state, action) => {
+    //   const incommingNoti = action.payload
 
-      const getInvitation = state.currentNoti.find(
-        (i) => i._id === incommingNoti._id
-      )
-      getInvitation.boardInvitation = incommingNoti.boardInvitation
-    })
+    //   const getInvitation = state.currentNoti.find(
+    //     (i) => i._id === incommingNoti._id
+    //   )
+    //   getInvitation.boardInvitation = incommingNoti.boardInvitation
+    // })
   }
 })
 

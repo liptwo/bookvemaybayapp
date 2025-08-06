@@ -16,7 +16,7 @@ import { socketIoInstance } from '~/socketClient'
 import { useNavigate } from 'react-router-dom'
 import {
   addNotifications,
-  fecthBookingSeatAPI,
+  fecthNotiAPI,
   selectCurrentNoti
 } from '~/redux/item/useNoti'
 import { Link } from '@mui/material'
@@ -70,22 +70,10 @@ function Notifications({textColor, scrolled}) {
   //     }
   //   })
   // }
-
   useEffect(() => {
-    // dispatch(fecthBookingSeatAPI())
-    // Giả sử userInfo chứa thông tin người dùng đã đăng nhập
-    // tạo một cái function xử lý khi nhận được sự kiện realtime BE_USER_INVITED_TO_BOARD từ phía server gửi về
-    // const onReceiveNewInvitation = (noti) => {
-    //   // nếu thằng user đang đăng nhập hiện tại mà chúng ta lưu trong redux chính là thằng invitee trong bản
-    //   // ghi invitation
-    //   console.log('noti', noti)
-    //   if (noti.inviteeId === currentUser._id) {
-    //     // bước 1 thêm bản ghi invitation mới vào trong redux
-    //     dispatch(addNotifications(noti))
-    //     // bước 2 cập nhập newNotification đang có thông báo đến
-    //     setNewNotification(true)
-    //   }
-    // }
+    // fecth danh sách các lời mời
+    dispatch(fecthNotiAPI(currentUser._id))
+
     const onReceiveNewInvitation = (noti) => {
       console.log('New notification:', noti)
       // Cập nhật state để hiển thị thông báo mới
@@ -168,7 +156,7 @@ function Notifications({textColor, scrolled}) {
                 {/* Thời gian của thông báo */}
                 <Box sx={{ textAlign: 'right' }}>
                   <Typography variant='span' sx={{ fontSize: '13px' }}>
-                    {moment().format('llll')}
+                    {moment(noti?.timestamp).format('llll')}
                   </Typography>
                 </Box>
               </Box>
