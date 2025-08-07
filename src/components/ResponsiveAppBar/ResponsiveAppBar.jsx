@@ -25,6 +25,7 @@ function ResponsiveAppBar({ textColor, scrolled }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null)
   const [anchorElUser, setAnchorElUser] = React.useState(null)
   const currentUser = useSelector(selectCurrentUser)
+  // console.log(currentUser)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
