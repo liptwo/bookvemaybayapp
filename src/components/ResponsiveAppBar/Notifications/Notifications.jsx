@@ -120,6 +120,7 @@ function Notifications({textColor, scrolled}) {
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
+        // aria-hidden="true"
         MenuListProps={{ 'aria-labelledby': 'basic-button-open-notification' }}
       >
         {notifications?.length === 0 && (
