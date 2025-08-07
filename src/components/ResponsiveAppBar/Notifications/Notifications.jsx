@@ -129,6 +129,7 @@ function Notifications({textColor, scrolled}) {
           </MenuItem>
         )}
         {notifications?.map((noti, index) => (
+          
           <Box key={index}>
             <MenuItem
               sx={{
