@@ -3,7 +3,7 @@ import React from 'react'
 // import AppBarNoLogo from '~/components/ResponsiveAppBar/AppBarNoLogo' // Chưa sử dụng, có thể xóa
 import VHL from '~/asset/img/travellokaBg.webp'
 // import Trusted from '../../asset/img/trusted.png' // Chưa sử dụng, có thể xóa
-import { Box, Button, Typography } from '@mui/material' // Thêm Typography
+import { Badge, Box, Button, Typography } from '@mui/material' // Thêm Typography
 import Container from '@mui/material/Container'
 import {
   Gift,
@@ -14,8 +14,6 @@ import {
   Copy,
   // Search,
   BadgeQuestionMark,
-  Badge,
-  MessageSquareMore
 } from 'lucide-react'
 import km1 from '../../asset/img/km1.png'
 import km2 from '../../asset/img/km2.png'
@@ -33,12 +31,15 @@ import r3 from '../../asset/img/r3.png'
 import SearchFlight from './SearchFlight'
 import UserChat from '~/components/Chat/UserChat'
 import AppBarCustom from '~/components/ResponsiveAppBar/AppBarCustom'
+import { MessageSquareMore } from 'lucide-react'
 
 const Home = () => {
-  const [showChat, setShowChat] = React.useState(false)
-  const toggleChat = () => {
-    setShowChat((prev) => !prev)
-  }
+
+  // const [showChat, setShowChat] = React.useState(false)
+
+  // const toggleChat = () => {
+  //   setShowChat((prev) => !prev)
+  // }
   return (
     <div className=' min-h-screen pb-10 font-sans'>
       {/* Banner và Thanh điều hướng */}
@@ -386,7 +387,7 @@ const Home = () => {
           className='hover:cursor-pointer hover:brightness-90 p-3'
         >
           <Badge badgeContent={4} color='primary'>
-            <MessageSquareMore   size={30}></MessageSquareMore>
+            <MessageSquareMore size={30}></MessageSquareMore>
           </Badge>
         </div>
         <div className='absolute -top-100 right-5'>

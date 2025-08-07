@@ -15,7 +15,7 @@ const DrawerConfirm = ({ flight, anchorBL, setAnchorBL }) => {
   const toggleDrawer = (newOpen) => () => {
     setAnchorBL(newOpen)
   }
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     const newBooking = {
       flightId: flight._id,
       status: STATUS.CONFIRMED,
@@ -23,14 +23,22 @@ const DrawerConfirm = ({ flight, anchorBL, setAnchorBL }) => {
       passengerEmail: currentUser.email
     }
 
-    createBookingAPI(newBooking)
-    toggleDrawer(false)
+    try {
+      await createBookingAPI(newBooking)
+      toggleDrawer(false)() // GỌI hàm đóng drawer
+    } catch (error) {
+      console.error('Booking failed:', error)
+    }
   }
 
   const DrawerEL = (
     <Box
       className='flex flex-col px-2 gap-2'
-      sx={{ width: '700px' }}
+      sx={{
+        width: '700px',
+        minHeight: '100vh', // 👈 Thêm dòng này để Drawer luôn full chiều cao
+        backgroundColor: 'white' // 👈 Đảm bảo màu nền trắng (hoặc tuỳ bạn)
+      }}
       role='presentation'
     >
       <div className='flex w-full items-end justify-end '>
@@ -55,7 +63,7 @@ const DrawerConfirm = ({ flight, anchorBL, setAnchorBL }) => {
   return (
     <>
       {/* <Button onClick={toggleDrawer(true)}>Open drawer</Button> */}
-      <Drawer anchor={anchor} open={anchorBL} onClose={toggleDrawer(false)}>
+      <Drawer anchor={anchor} className='w-full' open={anchorBL} onClose={toggleDrawer(false)}>
         {DrawerEL}
       </Drawer>
     </>

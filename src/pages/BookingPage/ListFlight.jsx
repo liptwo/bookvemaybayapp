@@ -43,7 +43,7 @@ const ListFlight = () => {
         {flights.map(((fl, i) => (
           <div key={i}>
             <Flight handleOpenDrawer={handleOpenDrawer} flight={fl}/>
-            <DrawerConfirm flight={fl} anchorBL={anchorBL} setAnchorBL={setAnchorBL} ></DrawerConfirm>
+            <DrawerConfirm flight={fl} anchorBL={anchorBL} setAnchorBL={setAnchorBL} />
           </div>
         )))}
       </Box>

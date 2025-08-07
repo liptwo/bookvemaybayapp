@@ -72,7 +72,7 @@ function Notifications({textColor, scrolled}) {
   // }
 
   useEffect(() => {
-    dispatch(fecthBookingSeatAPI())
+    // dispatch(fecthBookingSeatAPI())
     // Giả sử userInfo chứa thông tin người dùng đã đăng nhập
     // tạo một cái function xử lý khi nhận được sự kiện realtime BE_USER_INVITED_TO_BOARD từ phía server gửi về
     // const onReceiveNewInvitation = (noti) => {
@@ -126,6 +126,7 @@ function Notifications({textColor, scrolled}) {
       </Tooltip>
 
       <Menu
+        disableScrollLock
         sx={{ mt: 2 }}
         id='basic-notification-drop-down'
         anchorEl={anchorEl}
@@ -163,7 +164,7 @@ function Notifications({textColor, scrolled}) {
                     {noti?.message}
                   </Box>
                 </Box>
-                <Link> Nhấn vào đây để đến trang đặt vé</Link>
+                <Link href={`/flight/seat/${noti?.bookingDetails._id}`}> Nhấn vào đây để đến trang đặt vé</Link>
                 {/* Thời gian của thông báo */}
                 <Box sx={{ textAlign: 'right' }}>
                   <Typography variant='span' sx={{ fontSize: '13px' }}>

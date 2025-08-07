@@ -4,12 +4,13 @@ import { createTheme } from '@mui/material/styles';
 // import { blue, deepOrange, orange, teal } from '@mui/material/colors'
 
 const theme = createTheme({
+  defaultColorScheme: 'light',
   colorSchemes: {
     light: {
       palette: {
         text: {
           primary: '#172b4d'
-        }
+        },
       }
     },
     dark: {
@@ -47,7 +48,8 @@ const theme = createTheme({
             borderRadius: '8px'
           },
           '*::-webkit-scrollbar-thumb:hover': {
-            backgroundColor: 'rgb(207, 218, 233)' }
+            backgroundColor: 'rgb(207, 218, 233)'
+          }
         }
       }
     },
@@ -56,7 +58,7 @@ const theme = createTheme({
         root: {
           textTransform: 'none',
           borderWidth: '0.5px',
-          '&:hover': { borderWidth:'0.5px' }
+          '&:hover': { borderWidth: '0.5px' }
         }
       }
     },
