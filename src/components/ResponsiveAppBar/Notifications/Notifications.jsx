@@ -129,7 +129,7 @@ function Notifications({textColor, scrolled}) {
           </MenuItem>
         )}
         {notifications?.map((noti, index) => (
-          
+
           <Box key={index}>
             <MenuItem
               sx={{
@@ -154,7 +154,7 @@ function Notifications({textColor, scrolled}) {
                     {noti?.message}
                   </Box>
                 </Box>
-                <Link href={`/flight/seat/${noti?.bookingDetails._id}`}> Nhấn vào đây để đến trang đặt vé</Link>
+                <Link href={`/flight/seat/${noti?.bookingDetails.flightId}`}> Nhấn vào đây để đến trang đặt vé</Link>
                 {/* Thời gian của thông báo */}
                 <Box sx={{ textAlign: 'right' }}>
                   <Typography variant='span' sx={{ fontSize: '13px' }}>

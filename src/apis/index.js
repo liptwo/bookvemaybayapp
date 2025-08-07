@@ -37,3 +37,12 @@ export const refreshTokenAPI = async ( ) => {
   return request.data
 }
 
+
+// api tìm chuyến bay theo id
+export const getFlightAPI = async ( flightId ) => {
+  const request = await authorizedAxiosInstance.get(`${API_ROOT}/v1/flights/${flightId}`)
+  console.log('request', request)
+  // toast.success('Account verified successfully! Now you can login to enjoy to our services!', { theme: 'colored' })
+  return request.data
+}
+
