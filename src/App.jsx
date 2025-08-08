@@ -12,8 +12,9 @@ import StaffChat from './components/Chat/StaffChat'
 import Settings from './pages/Settings/Settings'
 import BookingSeat from './pages/BookingSeat/BookingSeat'
 import { ChatProvider } from './components/Chat/ChatProvider'
-import ChatWidget from './components/Chat/ChatWidget'
-import ChatButton from './components/Chat/ChatButton'
+// import ChatWidget from './components/Chat/ChatWidget'
+// import ChatButton from './components/Chat/ChatButton'
+// import AppBarCustom from './components/ResponsiveAppBar/AppBarCustom'
 
 // Cách 2 xử lý đã đăng nhập
 // * Giải pháp Clean Code trong việc xác định các route nào cần đăng nhập tài khoản xong thì mới cho truy cập
@@ -44,6 +45,7 @@ function App() {
 
   return (
     <ChatProvider>
+
       <Routes>
         // redireact route
         <Route

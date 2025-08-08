@@ -48,7 +48,7 @@ export const activeNotiSlice = createSlice({
     builder.addCase(fecthNotiAPI.fulfilled, (state, action) => {
       const incommingNoti= action.payload
       // console.log('incommingNoti', incommingNoti)
-      state.currentNoti = incommingNoti.data
+      state.currentNoti = incommingNoti.data.reverse()
     })
 
     // builder.addCase(updateBookingSeatAPI.fulfilled, (state, action) => {
