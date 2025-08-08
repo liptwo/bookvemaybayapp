@@ -1,4 +1,4 @@
-# BookVeXeApp - Giao diện Đặt vé máy bay
+# BookVeMayBayApp - Giao diện Đặt vé máy bay
 
 Đây là dự án Frontend cho hệ thống đặt vé máy bay, được xây dựng bằng React.js. Giao diện được thiết kế để tương tác với [BookVeXeAPIs](https://github.com/your-username/BookVeXeAPIs) (bạn có thể thay link tới repo backend của mình ở đây), cung cấp trải nghiệm người dùng mượt mà từ tìm kiếm chuyến bay đến hỗ trợ trực tuyến.
 
