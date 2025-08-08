@@ -38,6 +38,9 @@
 
 ## 📂 Cấu trúc thư mục
 Dự án được tổ chức theo cấu trúc hướng tính năng (feature-oriented), giúp dễ dàng quản lý và mở rộng.
+
+```
+.
 ├── public/ 
 ├── src/
 │ ├── apis/          # Chứa các hàm gọi API (ví dụ: chatAPI.js, index.js)
@@ -53,7 +56,7 @@ Dự án được tổ chức theo cấu trúc hướng tính năng (feature-ori
 ├── .env             # Tệp chứa các biến môi trường (cần tự tạo)
 ├── package.json     # Chứa thông tin về dự án và các dependencies
 └── README.md
-
+```
 
 ## 🛠️ Cài đặt và Chạy dự án
 
