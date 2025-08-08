@@ -37,9 +37,22 @@
 -   **Real-time:** Socket.IO Client
 
 ## 📂 Cấu trúc thư mục
-
 Dự án được tổ chức theo cấu trúc hướng tính năng (feature-oriented), giúp dễ dàng quản lý và mở rộng.
-. ├── public/ ├── src/ │ ├── apis/ # Các hàm gọi API (e.g., chatAPI.js, index.js) │ ├── assets/ # Tài nguyên tĩnh (hình ảnh, icons) │ ├── components/ # Các component tái sử dụng (Chat, AppBar, etc.) │ ├── hooks/ # Các custom hooks │ ├── pages/ # Các trang chính của ứng dụng (Home, Auth, BookingPage) │ ├── redux/ # Cấu hình Redux (store, slices) │ ├── utils/ # Các hàm tiện ích (axios instance, constants) │ ├── App.jsx # Component gốc, quản lý routing │ ├── App.css # CSS toàn cục và các animation tùy chỉnh │ └── main.jsx # Điểm khởi đầu của ứng dụng React ├── .env # Biến môi trường (cần tự tạo) ├── package.json └── README.md
+├── public/ 
+├── src/
+│ ├── apis/          # Chứa các hàm gọi API (ví dụ: chatAPI.js, index.js)
+│ ├── assets/        # Nơi lưu trữ tài nguyên tĩnh (hình ảnh, icons)
+│ ├── components/    # Chứa các component tái sử dụng (Chat, AppBar, etc.)
+│ ├── hooks/         # Nơi lưu trữ các custom hooks
+│ ├── pages/         # Chứa các trang chính của ứng dụng (Home, Auth, BookingPage)
+│ ├── redux/         # Nơi cấu hình Redux (store, slices)
+│ ├── utils/         # Chứa các hàm tiện ích (axios instance, constants)
+│ ├── App.jsx        # Component gốc, quản lý routing
+│ ├── App.css        # Chứa CSS toàn cục và các animation tùy chỉnh
+│ └── main.jsx       # Điểm khởi đầu của ứng dụng React
+├── .env             # Tệp chứa các biến môi trường (cần tự tạo)
+├── package.json     # Chứa thông tin về dự án và các dependencies
+└── README.md
 
 
 ## 🛠️ Cài đặt và Chạy dự án
