@@ -11,13 +11,13 @@ import { selectCurrentUser } from '~/redux/item/userSlice'
 const rows = 10
 const seats = ['A', 'B', 'C', 'D', 'E', 'F'] // ABC | DEF
 
-const SeatMap = ({ flightId, userId }) => {
+const SeatMap = ({ flightId, userId, mySeat, setMySeat }) => {
 
   // const userId = currentUser._id
   const [selected, setSelected] = useState(null)
   const [occupied, setOccupied] = useState([])
   const [seatData, setSeatData] = useState({})
-  const [mySeat, setMySeat] = useState(null)
+
 
   // useEffect(() => {
   //   socketIoInstance.on('seatUpdate', (data) => {

@@ -58,7 +58,6 @@ const Home = () => {
         {' '}
         {/* Thêm relative z-10 để nội dung nằm trên ảnh */}
         {/* <Box sx={{ height: 'auto', paddingTop: 2 }} className='bg-transparent'> Bỏ chiều cao cố định, thêm padding */}
-        <AppBarCustom />
         {/* </Box> */}
         {/* Form tìm kiếm */}
         <SearchFlight></SearchFlight>

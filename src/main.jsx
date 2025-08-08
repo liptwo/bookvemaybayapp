@@ -17,6 +17,7 @@ import persistStore from 'redux-persist/es/persistStore'
 import { PersistGate } from 'redux-persist/integration/react'
 import { injectStore } from './utils/authorizeAxios'
 import theme from './theme.js'
+import AppBarCustom from './components/ResponsiveAppBar/AppBarCustom.jsx'
 injectStore(store)
 const persistor = persistStore(store)
 
@@ -46,6 +47,7 @@ createRoot(document.getElementById('root')).render(
             />
 
             <CssBaseline />
+            <AppBarCustom />
             <App />
             {/* <SmoothCursor /> */}
             <ToastContainer position='bottom-right' autoClose={3000} />

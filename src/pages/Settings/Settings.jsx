@@ -32,9 +32,9 @@ function Settings() {
 
   return (
     <Container disableGutters maxWidth='lg' >
-      <ResponsiveAppBar textColor={'black'} justResponeAppBar={true} />
+      {/* <ResponsiveAppBar textColor={'black'} justResponeAppBar={true} /> */}
       <TabContext value={activeTab}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider', display: 'flex', width:'100%', itemAlign: 'center', justifyContent: 'flex-start' }}>
+        <Box sx={{ borderBottom: 1, marginTop: '60px', borderColor: 'divider', display: 'flex', width:'100%', itemAlign: 'center', justifyContent: 'flex-start' }}>
           <TabList onChange={handleChangeTab} aria-label="settings tabs" >
             <Tab
               label="Account"

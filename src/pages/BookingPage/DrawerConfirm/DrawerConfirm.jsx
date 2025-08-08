@@ -8,27 +8,18 @@ import { createBookingAPI } from '~/apis'
 import { useSelector } from 'react-redux'
 import { selectCurrentUser } from '~/redux/item/userSlice'
 import { STATUS } from '~/utils/constants'
+import { useNavigate } from 'react-router-dom'
 const DrawerConfirm = ({ flight, anchorBL, setAnchorBL }) => {
   // const [open, setOpen] = useState(false)
-  const currentUser = useSelector(selectCurrentUser)
+  // const currentUser = useSelector(selectCurrentUser)
   const anchor = 'right'
+  const navigate = useNavigate()
   const toggleDrawer = (newOpen) => () => {
     setAnchorBL(newOpen)
   }
   const handleConfirm = async () => {
-    const newBooking = {
-      flightId: flight._id,
-      status: STATUS.CONFIRMED,
-      passengerName: currentUser.username,
-      passengerEmail: currentUser.email
-    }
-
-    try {
-      await createBookingAPI(newBooking)
-      toggleDrawer(false)() // GỌI hàm đóng drawer
-    } catch (error) {
-      console.error('Booking failed:', error)
-    }
+    toggleDrawer(false)() // GỌI hàm đóng drawer
+    navigate(`/flight/seat/${flight._id}`)
   }
 
   const DrawerEL = (

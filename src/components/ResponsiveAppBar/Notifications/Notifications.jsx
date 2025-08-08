@@ -73,7 +73,7 @@ function Notifications({textColor, scrolled}) {
   useEffect(() => {
     // fecth danh sách các lời mời
     dispatch(fecthNotiAPI(currentUser._id))
-
+    setNewNotification(true)
     const onReceiveNewInvitation = (noti) => {
       console.log('New notification:', noti)
       // Cập nhật state để hiển thị thông báo mới
@@ -154,7 +154,7 @@ function Notifications({textColor, scrolled}) {
                     {noti?.message}
                   </Box>
                 </Box>
-                <Link href={`/flight/seat/${noti?.bookingDetails.flightId}`}> Nhấn vào đây để đến trang đặt vé</Link>
+                {/* <Link href={`/flight/seat/${noti?.bookingDetails.flightId}`}> Nhấn vào đây để đến trang đặt vé</Link> */}
                 {/* Thời gian của thông báo */}
                 <Box sx={{ textAlign: 'right' }}>
                   <Typography variant='span' sx={{ fontSize: '13px' }}>
